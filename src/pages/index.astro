@@ -1,16 +1,33 @@
 ---
-import './src/styles/global.css'
+import '@/styles/global.css'
+import { getCollection } from "astro:content"
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Greeting from '@/components/Greeting'
+import TechMarquee from '@/components/TechMarquee'
+
+const blogPosts = await getCollection('blog')
+blogPosts.sort((a, b) => Date.parse(a.data.pubDate) - Date.parse(b.data.pubDate))
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>My Astro Website</h1>
-	</body>
-</html>
+<BaseLayout pageTitle="Home page">
+	<div class="flex flex-col items-center gap-y-8 my-20">
+		<Greeting
+			messages={["Hi", "Hello", "Hey there", "Cześć", "Hej", "Siema", "Ahoj", "안녕하세요", "Salve", "Ciao", "Aloha", "Hola", "こんにちは"]}
+			client:load
+		/>
+		<p class="text-lg sm:text-xl max-w-[50ch] text-balance text-center leading-[2.25]">
+			I'm mainly a <strong class="pb-0.5 border-b-4 border-purple">Front-end Developer</strong>
+			and <strong class="pb-0.5 border-b-4 border-green-darker">UI/UX&nbsp;Designer</strong>,
+			but I&nbsp;also hold a&nbsp;master's degree in <strong class="pb-0.5 border-b-4 border-green-light/80">Psychology</strong>,
+			<strong class="pb-0.5 border-b-4 border-green-light/30">make music</strong> and do all sorts of stuff...
+		</p>
+		<hr class="mx-auto my-4 w-1/4 border-0 border-b border-green-darker">
+		<div class="w-full flex flex-col items-center gap-4">
+			<span class="text-xl">What I work with:</span>
+			<TechMarquee client:only="preact" />
+		</div>
+		<p>
+			I'm interested in authenticity, positive solitude and finding oneself. I also greatly enjoy teaching, giving lives more meaning, people more satisfaction and ultimately making the world a better place.
+		</p>
+	</div>
+</BaseLayout>

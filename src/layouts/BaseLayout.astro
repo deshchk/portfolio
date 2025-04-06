@@ -1,0 +1,32 @@
+---
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import '@fontsource-variable/montserrat'
+import '@fontsource-variable/open-sans'
+import '@/styles/global.css'
+
+const { pageTitle } = Astro.props
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Daniel Leszczak – personal website with portfolio">
+    <title>{`Daniel Leszczak – ${pageTitle}`}</title>
+  </head>
+  <body style="opacity: 0; transition-property: opacity; transition-duration: .7s;">
+    <Header />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
+
+    <script>
+      import "@/scripts/global.js"
+    </script>
+  </body>
+</html>

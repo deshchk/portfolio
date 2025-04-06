@@ -1,0 +1,22 @@
+---
+import SocialIcon from "@components/SocialIcon"
+
+const links = [
+  {name: 'linkedin', url: 'https://linkedin.com/in/leszczak', color: "#0b66c2"},
+  {name: 'github', url: 'https://github.com/deshchk', color: "#1a1f25"},
+  {name: 'youtube', url: 'https://www.youtube.com/@deszczak', color: "#ff0133"}
+]
+---
+
+<footer>
+  <ul class="w-full flex justify-center gap-8">
+    {links.map(link => (
+      <li>
+        <a href={link.name} class="flex flex-col gap-2 items-center text-xs tracking-wider p-2 outline-0 outline-dashed focus:outline-1" style=`color: ${link.color}; outline-color: ${link.color}`>
+          <SocialIcon name={link.name} className="size-8" />
+          {link.name}
+        </a>
+      </li>
+    ))}
+  </ul>
+</footer>

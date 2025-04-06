@@ -1,0 +1,15 @@
+---
+import '@/styles/global.css'
+import { getCollection } from "astro:content"
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+const blogPosts = await getCollection('blog')
+blogPosts.sort((a, b) => Date.parse(a.data.pubDate) - Date.parse(b.data.pubDate))
+---
+
+<BaseLayout pageTitle="Blog">
+    <p>Lista postów z bloga:</p>
+    <ul>
+      {blogPosts.map((post: any) => <li><a href={`/posts/${post.id}`}>{post.data.title}</a></li>)}
+    </ul>
+</BaseLayout>

@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* noinspection CssInvalidAtRule */
+@theme {
+  --color-darkest: rgb(10 12 3);
+  --color-lightest: rgb(243 247 227);
+  --color-green-darkest: rgb(83, 178, 76);
+  --color-green-darker: rgb(143, 204, 143);
+  --color-green-light: rgb(191 227 198);
+  --color-blue: rgb(50 78 143);
+  --color-purple: rgb(135 81 158);
+  --color-purple-dark: rgb(105, 52, 138);
+  --font-os: 'Open Sans Variable', sans-serif;
+  --font-ms: 'Montserrat Variable', sans-serif;
+}
+
+/* noinspection CssInvalidAtRule */
+@view-transition {
+  /* noinspection CssUnknownProperty */
+  navigation: auto;
+}
+
+:root {
+  @apply bg-lightest text-darkest;
+  font-family: 'Open Sans Variable', sans-serif;
+}
+
+body {
+  @apply max-w-6xl mx-auto;
+}
+
+:is(header, main, footer) {
+  @apply px-4 sm:px-6;
+}
+
+:is(h1, h2, h3, h4, h5, h6) {
+  font-family: 'Montserrat Variable', sans-serif;
+}
+
+.greeting-button {
+  grid-template-columns: 34px auto;
+
+  @media (width < 640px) {
+    grid-template-columns: 26px auto;
+  }
+}
+
+
+
+@keyframes waving {
+  0% {
+    transform: rotate(0) translateY(0);
+  }
+  20% {
+    transform: rotate(0) translateY(-10px);
+  }
+  40% {
+    transform: rotate(-20deg) translateY(-12px);
+  }
+  55% {
+    transform: rotate(10deg) translateY(-10px);
+  }
+  70% {
+    transform: rotate(-30deg) translateY(-8px);
+  }
+  100% {
+    transform: rotate(0) translateY(0);
+  }
+}
