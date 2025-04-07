@@ -30,6 +30,7 @@
 
 html {
   overflow-y: scroll;
+  margin-left: calc(100vw - 100%);
 }
 
 body {
@@ -37,7 +38,7 @@ body {
 }
 
 :is(header, main, footer) {
-  @apply px-4 sm:px-6;
+  @apply px-2 sm:px-4;
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
@@ -52,8 +53,48 @@ body {
   }
 }
 
-body:has(.footer-link:hover) .footer-link:not(:hover) {
+body:has(.footer-link:hover) .footer-link:not(:hover),
+body:has(.footer-link:focus) .footer-link:not(:focus){
   @apply opacity-50;
+}
+
+.footer-link:focus {
+  @apply !opacity-100;
+}
+
+#form {
+  label {
+    @apply font-medium sm:text-lg;
+  }
+
+  input, textarea {
+    @apply bg-white min-h-[calc(1lh+12px)] rounded px-2.5 py-1.5 border border-dashed border-green;
+    @apply outline-transparent outline-offset-3 outline-3 [transition:outline-color_.2s];
+
+    &:placeholder-shown {
+      @apply text-blue;
+    }
+
+    &:focus {
+      @apply outline-green-light;
+      &::placeholder {
+        @apply opacity-40;
+      }
+    }
+  }
+
+  select {
+    @apply appearance-none bg-white min-h-[calc(1lh+12px)] rounded px-2.5 py-1.5 border border-dashed border-green;
+    @apply outline-transparent outline-offset-3 outline-3 [transition:outline-color_.2s];
+
+    &:focus {
+      @apply outline-green-light;
+    }
+
+    &:invalid {
+      @apply text-blue/50;
+    }
+  }
 }
 
 

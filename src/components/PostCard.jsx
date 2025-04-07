@@ -17,8 +17,6 @@ export default function PostCard({ post, className }) {
     }
 
     function handleEnd() {
-      document.removeEventListener('mousemove', e => {})
-
       tagList.current.style.cursor = 'grab'
       tagList.current.style.removeProperty('user-select')
 

@@ -6,8 +6,8 @@ import Greeting from '@/components/Greeting'
 import TechMarquee from '@/components/TechMarquee'
 import PostCard from '@/components/PostCard'
 import { formatDate, timeElapsed } from '@/scripts/utils'
-import Stars from '@@@/stars.svg'
-import Pointer from '@@@/pointer.svg'
+import Stars from '@@/stars.svg'
+import Pointer from '@@/pointer.svg'
 
 const blogPosts = await getCollection('blog')
 blogPosts.sort((a, b) => Date.parse(a.data.pubDate) - Date.parse(b.data.pubDate))

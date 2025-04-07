@@ -1,10 +1,105 @@
 ---
 import '@/styles/global.css'
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import Loader from '@@/loader.svg'
+import Chevron from '@@/chevron.svg'
 ---
 
 <BaseLayout pageTitle="About me">
-  <div class="text-center my-20">
-    Work in progress
+  <div class="mx-auto my-20 max-w-lg">
+    <p class="group text-xl sm:text-2xl font-ms font-bold text-center mb-20">
+      Feel free to contact <span class="group-hover:text-green-dark transition-colors">me</span>!
+    </p>
+    <form class="relative flex flex-col gap-6 mx-2" id="form" method="POST">
+      <input type="hidden" name="access_key" value="44e07fe1-be61-4cdf-9dc7-45c45c858baf">
+
+      <fieldset class="flex flex-col gap-1">
+        <label for="email">Your email:</label>
+        <input id="email" type="email" name="email" placeholder="Where should I send my response?" required>
+      </fieldset>
+
+      <fieldset class="flex flex-col gap-1">
+        <label for="subject">Subject:</label>
+        <div class="relative">
+          <select id="subject" class="w-full peer" name="subject" required>
+            <option value selected disabled>
+              Choose one
+            </option>
+            <option value="Job offer">
+              Job offer
+            </option>
+            <option value="Networking / Collaboration">
+              Networking / Collaboration
+            </option>
+            <option value="Feedback">
+              Feedback
+            </option>
+            <option value="Other">
+              Other
+            </option>
+          </select>
+          <Chevron class="size-4 absolute top-1/2 -translate-y-1/2 right-3 peer-focus:scale-y-[-1]" />
+        </div>
+      </fieldset>
+
+      <fieldset class="flex flex-col gap-1">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required rows="4" placeholder="What is the message you'd like me to receive?"></textarea>
+      </fieldset>
+
+      <button type="submit" class=`
+        mt-6 px-8 py-2 rounded bg-blue text-white cursor-pointer
+        outline-offset-3 outline-3 outline-transparent hover:outline-blue-light
+        focus:outline-blue-light [transition:outline-color_.2s]
+      `>Send</button>
+
+      <div id="result" class="absolute text-xl font-medium -inset-5 grid place-items-center bg-lightest/50 backdrop-blur-xs pointer-events-none opacity-0 [&:not([data-status=idle])]:opacity-100 transition-opacity" data-status="idle">
+        <Loader class="text-green-dark size-10" />
+      </div>
+    </form>
   </div>
 </BaseLayout>
+
+<script is:inline>
+  const id = DOMid => document.getElementById(DOMid)
+
+  id('form').addEventListener('submit', function(e) {
+    const formData = new FormData(id('form'))
+    e.preventDefault()
+
+    const object = {...Object.fromEntries(formData), subject: `Leszczak.pl – ${Object.fromEntries(formData).subject}`}
+    const json = JSON.stringify(object)
+
+    id('result').dataset.status = 'loading'
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: json
+    })
+      .then(async (response) => {
+        let json = await response.json()
+        if (response.status === 200) {
+          id('result').dataset.status = 'loading'
+          id('result').innerHTML = json.message
+        } else {
+          console.log(response)
+          id('result').innerHTML = json.message
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        id('result').dataset.status = 'error'
+        id('result').innerHTML = "Sorry... Something went wrong and it's not your fault! Try again later."
+      })
+      .then(function() {
+        id('form').reset()
+        setTimeout(() => {
+          id('result').dataset.status = "idle"
+        }, 3000)
+      })
+  })
+</script>
