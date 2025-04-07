@@ -4,7 +4,7 @@ import { getCollection } from "astro:content"
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import Greeting from '@/components/Greeting'
 import TechMarquee from '@/components/TechMarquee'
-import PostCard from '@/components/PostCard'
+import PostCard from '@/components/PostCard.astro'
 import { formatDate, timeElapsed } from '@/scripts/utils'
 import Stars from '@@/stars.svg'
 import Pointer from '@@/pointer.svg'
@@ -101,7 +101,7 @@ const status = {
 						</li>
 					</ul>
 				</aside>
-				<PostCard post={newestPost} className="mx-auto w-full md:max-w-80" client:load />
+				<PostCard post={newestPost} className="w-full md:max-w-80" />
 			</div>
 		</section>
 
