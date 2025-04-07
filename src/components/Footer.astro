@@ -9,10 +9,10 @@ const links = [
 ---
 
 <footer>
-  <ul class="w-full flex justify-center gap-8">
+  <ul class="w-full flex justify-center gap-8 mb-20">
     {links.map(link => (
       <li>
-        <a href={link.name} class="flex flex-col gap-2 items-center text-xs tracking-wider p-2 outline-0 outline-dashed focus:outline-1" style=`color: ${link.color}; outline-color: ${link.color}`>
+        <a href={link.url} target="_blank" class="footer-link flex flex-col gap-2 items-center text-xs tracking-wider p-2 outline-0 outline-dashed focus:outline-1 transition-opacity duration-300" style=`color: ${link.color}; outline-color: ${link.color}`>
           <SocialIcon name={link.name} className="size-8" />
           {link.name}
         </a>

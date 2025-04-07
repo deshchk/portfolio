@@ -4,30 +4,110 @@ import { getCollection } from "astro:content"
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import Greeting from '@/components/Greeting'
 import TechMarquee from '@/components/TechMarquee'
+import PostCard from '@/components/PostCard'
+import { formatDate, timeElapsed } from '@/scripts/utils'
+import Stars from '@@@/stars.svg'
+import Pointer from '@@@/pointer.svg'
 
 const blogPosts = await getCollection('blog')
 blogPosts.sort((a, b) => Date.parse(a.data.pubDate) - Date.parse(b.data.pubDate))
+const newestPost = blogPosts.toReversed()[0]
+
+const status = {
+	workplace: {name: 'Dotandspot sp. z o.o.', url: 'https://dotandspot.pl/', since: '2024-06-03'},
+}
 ---
 
 <BaseLayout pageTitle="Home page">
-	<div class="flex flex-col items-center gap-y-8 my-20">
-		<Greeting
-			messages={["Hi", "Hello", "Hey there", "Cześć", "Hej", "Siema", "Ahoj", "안녕하세요", "Salve", "Ciao", "Aloha", "Hola", "こんにちは"]}
-			client:load
-		/>
-		<p class="text-lg sm:text-xl max-w-[50ch] text-balance text-center leading-[2.25]">
-			I'm mainly a <strong class="pb-0.5 border-b-4 border-purple">Front-end Developer</strong>
-			and <strong class="pb-0.5 border-b-4 border-green-darker">UI/UX&nbsp;Designer</strong>,
-			but I&nbsp;also hold a&nbsp;master's degree in <strong class="pb-0.5 border-b-4 border-green-light/80">Psychology</strong>,
-			<strong class="pb-0.5 border-b-4 border-green-light/30">make music</strong> and do all sorts of stuff...
-		</p>
-		<hr class="mx-auto my-4 w-1/4 border-0 border-b border-green-darker">
-		<div class="w-full flex flex-col items-center gap-4">
-			<span class="text-xl">What I work with:</span>
+	<div class="flex flex-col items-center gap-y-20 my-20">
+		<h1 class="sr-only">Daniel Leszczak – Personal website and portfolio</h1>
+
+		<section class="flex flex-col items-center gap-y-6" aria-label="introduction">
+			<Greeting
+				messages={["Hi", "Hello", "Hey there", "Cześć", "Hej", "Siema", "Ahoj", "안녕하세요", "Salve", "Ciao", "Aloha", "Hola", "こんにちは"]}
+				client:load
+			/>
+
+			<p class="text-lg sm:text-xl max-w-[50ch] text-balance text-center leading-[2.25]" aria-label="short about me">
+				I'm mainly a <mark class="bg-transparent font-bold pb-0.5 border-b-4 border-purple" draggable="true">Front-end Developer</mark>
+				and <mark class="bg-transparent font-bold pb-0.5 border-b-4 border-green" draggable="true">UI/UX&nbsp;Designer</mark>,
+				but I&nbsp;also hold a&nbsp;master's degree in <mark class="bg-transparent font-semibold pb-0.5 border-b-4 border-green-light/80" draggable="true">Psychology</mark>,
+				<mark class="bg-transparent font-semibold pb-0.5 border-b-4 border-green-light/30" draggable="true">make music</mark> and do all sorts of stuff...
+			</p>
+		</section>
+
+		<section class="space-y-6" aria-label="information about my current situation and newest post">
+			<h2 class="text-xl text-center">What's going on?</h2>
+			<div class="mx-auto max-md:max-w-11/12 flex max-md:flex-col gap-10">
+				<aside class="flex flex-col border border-blue rounded-lg shadow-lg shadow-blue/15 w-full md:max-w-80 mx-auto">
+					<h3 class="flex flex-col gap-2 justify-center items-center mt-7 my-4 !font-os text-sm text-blue-dark font-medium tracking-wide">
+						<svg class="size-6 stroke-blue" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M12 17V11" stroke-width="1.5" stroke-linecap="round" />
+							<circle cx="1" cy="1" r="1" transform="matrix(1 0 0 -1 11 9)" class="fill-blue" stroke-width="0" />
+							<path
+								d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8"
+								stroke-width="1.5" stroke-linecap="round" />
+						</svg>
+						current status
+					</h3>
+					<ul class="flex-1 flex flex-col gap-y-3.5 justify-between pb-4">
+						<li class="space-y-4 px-4 pt-2">
+							<ul class="space-y-4">
+								<li class="relative">
+									<a href="https://linkedin.com/in/leszczak" class=`
+										grid place-items-center gap-4 bg-blue px-6 py-2.5 rounded-md
+										text-xl text-white text-shadow-lg text-shadow-darkest/20
+										inset-shadow-sm inset-shadow-darkest/20
+										outline-offset-3 outline-3 outline-transparent hover:outline-blue-light
+										focus:outline-blue-light [transition:outline-color_.2s]
+									`>
+										open to work
+									</a>
+									<Stars class="pointer-events-none absolute scale-x-[-1] size-12 -top-6 -left-6 text-amber-400" />
+								</li>
+								<li class="relative grid place-items-center">
+									<a href="https://pelky.leszczak.pl" target="_blank" class=`
+										flex items-center text-sm bg-blue-light/20 px-6 py-2.5 rounded-md inset-shadow-sm inset-shadow-blue/20
+										outline-offset-3 outline-3 outline-transparent hover:outline-blue-light
+										focus:outline-blue-light [transition:outline-color_.2s] w-full min-h-14
+									`>
+										<span class="pr-6">
+											I'm working on <span class="font-bold text-blue-dark">Pelky</span> – psychological tracker PWA
+										</span>
+									</a>
+									<div class="absolute right-4">
+										<Pointer class="pointer-events-none absolute size-7 md:size-8 -top-2.5 right-0 text-blue-dark animate-pulse" />
+										<div class="absolute -top-4 right-3.5 size-2 md:size-3 rounded-full animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite] outline-3 outline-blue-light transition-all -z-1" />
+									</div>
+								</li>
+							</ul>
+						</li>
+
+						<li class="mx-4">
+							<hr class="col-span-full w-full border-0 border-b border-blue-light"/>
+						</li>
+
+						<li class="gap-4 px-4">
+							<h4 class="text-xs">current position</h4>
+							<h4 class="text-sm text-blue font-bold">Front-end developer & UI/UX Designer</h4>
+							<ul class="space-y-0.5">
+								<li class="text-sm font-medium">
+									<a href={status.workplace.url} target="_blank" class="outline-transparent focus:outline-darkest outline-1 outline-dashed outline-offset-2">{status.workplace.name}</a>
+								</li>
+								<li class="space-x-3 text-xs tracking-wide">
+									<span class="text-blue">since {formatDate(status.workplace.since)}</span> <span class="font-semibold">{timeElapsed(status.workplace.since, { y:true, m: true })}</span>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</aside>
+				<PostCard post={newestPost} className="mx-auto w-full md:max-w-80" client:load />
+			</div>
+		</section>
+
+		<section class="w-full space-y-6 text-center">
+			<h2 class="text-xl">What I work with:</h2>
 			<TechMarquee client:only="preact" />
-		</div>
-		<p>
-			I'm interested in authenticity, positive solitude and finding oneself. I also greatly enjoy teaching, giving lives more meaning, people more satisfaction and ultimately making the world a better place.
-		</p>
+		</section>
 	</div>
 </BaseLayout>

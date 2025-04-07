@@ -2,14 +2,18 @@
 import '@/styles/global.css'
 import { getCollection } from "astro:content"
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import PostCard from '@/components/PostCard'
 
 const blogPosts = await getCollection('blog')
-blogPosts.sort((a, b) => Date.parse(a.data.pubDate) - Date.parse(b.data.pubDate))
+blogPosts.sort((a, b) => Date.parse(a.data.pubDate) - Date.parse(b.data.pubDate)).reverse()
 ---
 
 <BaseLayout pageTitle="Blog">
-    <p>Lista postów z bloga:</p>
-    <ul>
-      {blogPosts.map((post: any) => <li><a href={`/posts/${post.id}`}>{post.data.title}</a></li>)}
-    </ul>
+  <ul class="grid grid-cols-3 gap-6 my-20">
+    {blogPosts.map(post => (
+      <li>
+        <PostCard post={post} className="size-full" client:load />
+      </li>
+    ))}
+  </ul>
 </BaseLayout>

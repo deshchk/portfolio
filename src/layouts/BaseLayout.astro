@@ -7,7 +7,7 @@ import '@/styles/global.css'
 
 const { pageTitle } = Astro.props
 ---
-<html lang="en">
+<html lang="en" class="custom-scroll-thumb">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@ const { pageTitle } = Astro.props
     <meta name="description" content="Daniel Leszczak – personal website with portfolio">
     <title>{`Daniel Leszczak – ${pageTitle}`}</title>
   </head>
-  <body style="opacity: 0; transition-property: opacity; transition-duration: .7s;">
+  <body style="opacity: 0; transition-property: opacity; transition-duration: 1s;">
     <Header />
 
     <main>

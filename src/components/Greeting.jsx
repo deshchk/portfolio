@@ -68,7 +68,7 @@ export default function Greeting({ messages }) {
 
   return (
     <button
-      className="greeting-button grid font-ms text-2xl sm:text-3xl font-bold p-2 outline-0 outline-green-darkest outline-dashed focus:outline-1"
+      className="greeting-button grid font-ms text-2xl sm:text-3xl font-bold p-2 outline-0 outline-green-dark outline-dashed focus:outline-1"
       ref={greetingWrapper}
       onClick={changeGreeting}
       style={{

@@ -4,14 +4,17 @@
 @theme {
   --color-darkest: rgb(10 12 3);
   --color-lightest: rgb(243 247 227);
-  --color-green-darkest: rgb(83, 178, 76);
-  --color-green-darker: rgb(143, 204, 143);
   --color-green-light: rgb(191 227 198);
+  --color-green: rgb(143, 204, 143);
+  --color-green-dark: rgb(83, 178, 76);
+  --color-blue-light: rgb(153, 167, 191);
   --color-blue: rgb(50 78 143);
+  --color-blue-dark: rgb(28 39 76);
   --color-purple: rgb(135 81 158);
   --color-purple-dark: rgb(105, 52, 138);
   --font-os: 'Open Sans Variable', sans-serif;
   --font-ms: 'Montserrat Variable', sans-serif;
+  --inset-shadow-b: inset 0 0 6px var(--tw-inset-shadow-color);
 }
 
 /* noinspection CssInvalidAtRule */
@@ -23,6 +26,10 @@
 :root {
   @apply bg-lightest text-darkest;
   font-family: 'Open Sans Variable', sans-serif;
+}
+
+html {
+  overflow-y: scroll;
 }
 
 body {
@@ -42,6 +49,33 @@ body {
 
   @media (width < 640px) {
     grid-template-columns: 26px auto;
+  }
+}
+
+body:has(.footer-link:hover) .footer-link:not(:hover) {
+  @apply opacity-50;
+}
+
+
+
+.invisible-scroll {
+  @apply [scrollbar-color:transparent_transparent];
+  @apply [&::-webkit-scrollbar]:bg-transparent [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar-thumb]:bg-transparent;
+  @supports (scrollbar-color: black black) {
+    scrollbar-width: none;
+  }
+
+  -webkit-overflow-scrolling: touch;
+  & ::-webkit-scrollbar {
+    @apply !hidden;
+  }
+}
+
+.custom-scroll-thumb {
+  @apply [scrollbar-color:var(--color-green)_transparent];
+  @apply [&::-webkit-scrollbar]:bg-transparent [&::-webkit-scrollbar]:w-2.5 [&::-webkit-scrollbar-thumb]:bg-green;
+  @supports (scrollbar-color: black black) {
+    scrollbar-width: thin;
   }
 }
 

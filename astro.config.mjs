@@ -2,7 +2,9 @@
 import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
 import preact from '@astrojs/preact'
-import { remarkReadingTime } from "./plugins/remark-readng-time.mjs"
+import { remarkReadingTime } from "./plugins/remark-reading-time.mjs"
+
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,8 +12,13 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [preact()],
+  integrations: [preact(), mdx()],
+
   markdown: {
     remarkPlugins: [remarkReadingTime],
+  },
+
+  experimental: {
+    svg: true,
   }
 })

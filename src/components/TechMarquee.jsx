@@ -11,16 +11,12 @@ export default function TechMarquee() {
     modules: [Autoplay, A11y, FreeMode],
     direction: 'horizontal',
     loop: true,
-    speed: 2000,
+    speed: 2250,
     autoplay: {delay: 0},
     freeMode: {enabled: true},
     grabCursor: true,
     slidesPerView: 'auto',
     breakpoints: {
-      1028: {
-        slidesOffsetBefore: 840,
-        spaceBetween: 32,
-      },
       768: {
         slidesOffsetBefore: 600,
         spaceBetween: 24,
@@ -62,15 +58,15 @@ export default function TechMarquee() {
   }, [])
 
   return (
-    <div className="swiper w-11/12 sm:w-8/10 !py-3 sm:!py-6 bg-green-light rounded-xl inset-shadow-sm inset-shadow-green-darkest/40" ref={wrapper}>
+    <div className="swiper w-11/12 sm:w-10/12 min-[850px]:!w-6/10 !py-2 sm:!py-4 bg-green-light rounded-xl inset-shadow-sm inset-shadow-green-dark/40" ref={wrapper}>
       <div className="swiper-wrapper ![transition-timing-function:linear]">
         {things.map(thing => (
           <div className="swiper-slide !w-fit group relative p-4">
             <div className="absolute inset-0 grid place-items-center font-ms tracking-wider z-10 backdrop-blur-sm pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span className="bg-white/80 px-2 sm:px-4 py-1 rounded-md text-sm sm:text-base md:text-xl text-center shadow-sm shadow-green-darkest/50">{thing.name}</span>
+              <span className="bg-white/80 w-min px-2 sm:px-4 py-1 rounded-md text-sm sm:text-base text-center shadow-sm shadow-green-dark/50">{thing.name}</span>
             </div>
             <a href={thing.url} target="_blank">
-              <img src={thing.img} alt={thing.name} className="size-18 sm:size-28 md:size-32 drop-shadow-sm drop-shadow-darkest/40" draggable={false} loading="lazy"/>
+              <img src={thing.img} alt={thing.name} className="size-18 sm:size-22 drop-shadow-sm drop-shadow-darkest/40" draggable={false} loading="eager"/>
             </a>
           </div>
         ))}

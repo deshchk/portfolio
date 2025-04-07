@@ -3,12 +3,13 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro preview --host",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.2.3",
     "@astrojs/preact": "^4.0.8",
     "@fontsource-variable/montserrat": "^5.2.5",
     "@fontsource-variable/open-sans": "^5.2.5",
