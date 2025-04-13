@@ -18,6 +18,7 @@ export default function NavigationItem({ data, open }) {
     on(window, 'resize', () => {
       setBreakpoint()
     })
+    setBreakpoint()
   }, [])
 
   return (

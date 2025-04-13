@@ -12,6 +12,8 @@ const blog = defineCollection({
       alt: z.string()
     }),
     pubDate: z.coerce.date(),
+    modDate: z.coerce.date(),
+    link: z.string(),
     tags: z.array(z.string())
   })
 })

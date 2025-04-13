@@ -7,6 +7,7 @@
   --color-green-light: rgb(191 227 198);
   --color-green: rgb(143, 204, 143);
   --color-green-dark: rgb(83, 178, 76);
+  --color-green-darkest: rgb(51, 64, 51);
   --color-blue-light: rgb(153, 167, 191);
   --color-blue: rgb(50 78 143);
   --color-blue-dark: rgb(28 39 76);
@@ -35,10 +36,16 @@ html {
 
 body {
   @apply max-w-6xl mx-auto;
+  @media (pointer:coarse) {
+    @apply max-sm:px-4;
+  }
+  @media (pointer:fine) {
+    @apply max-md:px-2;
+  }
 }
 
 :is(header, main, footer) {
-  @apply px-2 sm:px-4;
+  @apply md:px-2.5;
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
@@ -68,15 +75,14 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
   }
 
   input, textarea {
-    @apply bg-white min-h-[calc(1lh+12px)] rounded px-2.5 py-1.5 border border-dashed border-green;
-    @apply outline-transparent outline-offset-3 outline-3 [transition:outline-color_.2s];
+    @apply appearance-none size-full block bg-green-light/30 min-h-[calc(1lh+12px)] px-2.5 py-1.5 border border-dashed border-green-light [transition:border-color_.2s];
 
     &:placeholder-shown {
-      @apply text-blue;
+      @apply text-green-darkest;
     }
 
     &:focus {
-      @apply outline-green-light;
+      @apply border-darkest outline-none;
       &::placeholder {
         @apply opacity-40;
       }
@@ -84,16 +90,41 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
   }
 
   select {
-    @apply appearance-none bg-white min-h-[calc(1lh+12px)] rounded px-2.5 py-1.5 border border-dashed border-green;
-    @apply outline-transparent outline-offset-3 outline-3 [transition:outline-color_.2s];
+    @apply appearance-none bg-green-light/30 min-h-[calc(1lh+12px)] px-2.5 py-1.5 border border-dashed border-green-light [transition:border-color_.2s];
 
     &:focus {
-      @apply outline-green-light;
+      @apply border-darkest outline-none;
     }
 
     &:invalid {
-      @apply text-blue/50;
+      @apply text-green-darkest/50;
     }
+  }
+}
+
+.md-post {
+  & h2 {
+    @apply font-bold text-xl mt-[1.5lh] mb-[.5lh];
+  }
+
+  & p {
+    @apply mb-[1lh];
+  }
+
+  & ol {
+    @apply list-decimal ml-4;
+  }
+
+  & ul {
+    @apply list-disc ml-4;
+  }
+
+  & li p {
+    @apply mb-[.25lh];
+  }
+
+  & code {
+    @apply inline-block px-2 py-px mx-px bg-green-light/50 rounded-md;
   }
 }
 
@@ -107,9 +138,8 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
   }
 
   -webkit-overflow-scrolling: touch;
-  & ::-webkit-scrollbar {
-    @apply !hidden;
-  }
+  &::-webkit-scrollbar { @apply !hidden }
+  & ::-webkit-scrollbar { @apply !hidden }
 }
 
 .custom-scroll-thumb {

@@ -1,38 +1,77 @@
 ---
+import { Image } from 'astro:assets'
 import BaseLayout from "@/layouts/BaseLayout.astro"
-const { post } = Astro.props
-const tags = [...new Set(post.tags.flat())]
+import { formatDate } from '@/scripts/utils'
+
+const { post, minutesRead } = Astro.props
 ---
 <BaseLayout pageTitle={post.title}>
-    <p>{post.pubDate.toLocaleDateString()}</p>
-    <p><em>{post.description}</em></p>
-    <p>Written by: {post.author}</p>
-    <img src={post.image.url} width="300" alt={post.image.alt} />
-    <div class="tags">
-      {tags.map((tag: string) => (
-        <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
-      ))}
+  <article class="flex flex-col mt-10 mb-20">
+    <div class="relative mb-8">
+      <Image
+        class="size-full aspect-video md:aspect-2/1 object-cover select-none rounded-lg"
+        src={post.image.url} alt={post.image.alt}
+        width="100%" height="100%"
+        loading="eager"
+      />
+      <p class="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 max-sm:text-xs max-md:text-sm font-medium rounded-md bg-lightest px-2 md:px-3.5 py-1">
+        {minutesRead}
+      </p>
     </div>
 
-    <slot />
+
+    <div class="grid md:grid-cols-[1fr_auto] gap-5">
+      <ul class="col-span-full flex flex-wrap gap-x-2 gap-y-4 text-xs">
+        {post.tags.map(tag => (
+          <li>
+            <a href={`/tags/${tag}`} class="shrink-0 px-2.5 py-0.5 bg-green-light/60 rounded-full hover:bg-green-dark hover:text-white outline-1 outline-offset-1 outline-transparent focus:outline-green-dark transition-all">
+              {tag}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <h1 class="col-span-full font-ms text-2xl md:text-3xl font-bold mt-1">
+        {post.title}
+      </h1>
+
+      <div class="space-y-1">
+        <p>
+          {post.description}
+        </p>
+
+        {post.link &&
+          <p>
+            Visit:
+            <a href={post.link} class=`
+              text-blue font-medium outline-offset-3 outline-1 outline-dashed outline-transparent
+              hover:outline-blue-light focus:outline-blue-light [transition:outline-color_.2s]
+            `>
+              {post.link}
+            </a>
+          </p>
+        }
+      </div>
+
+      <!--<hr class="md:hidden border-0 border-b border-green-light" />-->
+
+      <ul class="max-sm:mt-1 self-end flex md:flex-col flex-wrap gap-x-5 gap-y-1 md:gap-1 sm:max-md:justify-end sm:items-end text-green-darkest max-md:text-sm">
+        <li class={`${post.modDate ? 'opacity-50' : 'opacity-100'}`}>
+          Published: <span class="text-darkest tracking-wide font-medium">{formatDate(post.pubDate)}</span>
+        </li>
+        {post.modDate &&
+          <li>
+            Last modified: <span class="text-darkest tracking-wide font-medium">{formatDate(post.modDate)}</span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="md-post mt-20">
+      <slot />
+    </div>
+  </article>
 </BaseLayout>
 
 <style>
-  a {
-    color: #00539F;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: .5em;
-    padding: .5em 1em;
-    font-size: 1.15em;
-    background-color: #F8FCFD;
-  }
 </style>

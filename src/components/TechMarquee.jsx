@@ -58,7 +58,7 @@ export default function TechMarquee() {
   }, [])
 
   return (
-    <div className="swiper w-11/12 sm:w-10/12 min-[850px]:!w-6/10 !py-2 sm:!py-4 bg-green-light rounded-xl inset-shadow-sm inset-shadow-green-dark/40" ref={wrapper}>
+    <div className="swiper sm:w-10/12 min-[850px]:!w-6/10 !py-2 sm:!py-4 bg-green-light rounded-xl inset-shadow-sm inset-shadow-green-dark/40" ref={wrapper}>
       <div className="swiper-wrapper ![transition-timing-function:linear]">
         {things.map(thing => (
           <div className="swiper-slide !w-fit group relative p-4">

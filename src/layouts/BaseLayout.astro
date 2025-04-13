@@ -14,12 +14,12 @@ const { pageTitle } = Astro.props
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content="Daniel Leszczak – personal website with portfolio">
-    <title>{`Daniel Leszczak – ${pageTitle}`}</title>
+    <title>{`${pageTitle} – Leszczak.pl`}</title>
   </head>
   <body style="opacity: 0; transition-property: opacity; transition-duration: 1s;">
     <Header />
 
-    <main>
+    <main class="mx-1">
       <slot />
     </main>
 

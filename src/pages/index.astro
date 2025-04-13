@@ -22,23 +22,23 @@ const status = {
 	<div class="flex flex-col items-center gap-y-20 my-20">
 		<h1 class="sr-only">Daniel Leszczak – Personal website and portfolio</h1>
 
-		<section class="flex flex-col items-center gap-y-6" aria-label="introduction">
+		<section class="flex flex-col items-center gap-y-14" aria-label="introduction">
 			<Greeting
 				messages={["Hi", "Hello", "Hey there", "Cześć", "Hej", "Siema", "Ahoj", "안녕하세요", "Salve", "Ciao", "Aloha", "Hola", "こんにちは"]}
 				client:load
 			/>
 
-			<p class="text-lg sm:text-xl max-w-[50ch] text-balance text-center leading-[2.25]" aria-label="short about me">
-				I'm mainly a <mark class="bg-transparent font-bold pb-0.5 border-b-4 border-purple" draggable="true">Front-end Developer</mark>
-				and <mark class="bg-transparent font-bold pb-0.5 border-b-4 border-green" draggable="true">UI/UX&nbsp;Designer</mark>,
-				but I&nbsp;also hold a&nbsp;master's degree in <mark class="bg-transparent font-semibold pb-0.5 border-b-4 border-green-light/80" draggable="true">Psychology</mark>,
-				<mark class="bg-transparent font-semibold pb-0.5 border-b-4 border-green-light/30" draggable="true">make music</mark> and do all sorts of stuff...
+			<p class="text-lg sm:text-xl md:text-2xl max-w-[50ch] text-balance text-center leading-[2.25]" aria-label="short about me">
+				I'm mainly a <mark class="bg-transparent font-bold pb-0.5 border-b-4 border-purple">Front-end Developer</mark>
+				and&nbsp;<mark class="bg-transparent font-bold pb-0.5 border-b-4 border-green">UI/UX&nbsp;Designer</mark>,
+				but I&nbsp;also hold a&nbsp;master's degree in <mark class="bg-transparent font-semibold pb-0.5 border-b-4 border-green-light/80">Psychology</mark>,
+				<mark class="bg-transparent font-semibold pb-0.5 border-b-4 border-green-light/30">make music</mark> and do all sorts of stuff...
 			</p>
 		</section>
 
 		<section class="space-y-6" aria-label="information about my current situation and newest post">
 			<h2 class="text-xl text-center">What's going on?</h2>
-			<div class="mx-auto max-md:max-w-11/12 flex max-md:flex-col gap-10">
+			<div class="mx-auto max-md:max-w-[500px] flex max-md:flex-col gap-10">
 				<aside class="flex flex-col border border-blue rounded-lg shadow-lg shadow-blue/15 w-full md:max-w-80 mx-auto">
 					<h3 class="flex flex-col gap-2 justify-center items-center mt-7 my-4 !font-os text-sm text-blue-dark font-medium tracking-wide">
 						<svg class="size-6 stroke-blue" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

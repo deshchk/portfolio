@@ -9,7 +9,7 @@ blogPosts.sort((a, b) => Date.parse(a.data.pubDate) - Date.parse(b.data.pubDate)
 ---
 
 <BaseLayout pageTitle="Blog">
-  <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 my-20">
+  <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 mt-10 md:mt-20">
     {blogPosts.map(post => (
       <li>
         <PostCard post={post} />

@@ -13,15 +13,15 @@ import Chevron from '@@/chevron.svg'
     <form class="relative flex flex-col gap-6 mx-2" id="form" method="POST">
       <input type="hidden" name="access_key" value="44e07fe1-be61-4cdf-9dc7-45c45c858baf">
 
-      <fieldset class="flex flex-col gap-1">
+      <fieldset class="flex flex-col gap-1.5">
         <label for="email">Your email:</label>
         <input id="email" type="email" name="email" placeholder="Where should I send my response?" required>
       </fieldset>
 
-      <fieldset class="flex flex-col gap-1">
+      <fieldset class="flex flex-col gap-1.5">
         <label for="subject">Subject:</label>
         <div class="relative">
-          <select id="subject" class="w-full peer" name="subject" required>
+          <select id="subject" class="w-full" name="subject" aria-label="Choose one of the subjects for the message" required>
             <option value selected disabled>
               Choose one
             </option>
@@ -38,13 +38,16 @@ import Chevron from '@@/chevron.svg'
               Other
             </option>
           </select>
-          <Chevron class="size-4 absolute top-1/2 -translate-y-1/2 right-3 peer-focus:scale-y-[-1]" />
+          <Chevron class="size-4 absolute top-1/2 -translate-y-1/2 right-3 pointer-events-none" />
         </div>
       </fieldset>
 
-      <fieldset class="flex flex-col gap-1">
+      <fieldset class="flex flex-col gap-1.5">
         <label for="message">Message:</label>
-        <textarea id="message" name="message" required rows="4" placeholder="What is the message you'd like me to receive?"></textarea>
+          <div class="relative">
+            <textarea id="message" name="message" rows="4" placeholder="What is the message you'd like me to receive?" required></textarea>
+            <div class="absolute size-1.5 rounded-full bg-green-dark/50 bottom-1 right-1 pointer-events-none" />
+          </div>
       </fieldset>
 
       <button type="submit" class=`
