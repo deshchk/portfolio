@@ -65,8 +65,30 @@ const { post, minutesRead } = Astro.props
       </ul>
     </div>
 
-    <div class="md-post mt-14 sm:mt-20">
-      <slot />
+    <div class="grid lg:grid-cols-[auto_1fr] gap-10 mt-14 sm:mt-20">
+      <aside class="lg:sticky top-6 lg:top-10 z-20 h-fit p-2 bg-lightest border border-dashed border-green-dark rounded-md space-y-4">
+        <ul class="table-of-contents group/ul lg:max-w-[320px] space-y-1">
+          <li>
+            loading...
+          </li>
+        </ul>
+        <div class="h-2.5 w-full p-px rounded-full bg-green-light/60 border border-green-dark">
+          <div id="post-progress" class="h-full bg-green-dark rounded-full transition-[width]" style="width: 0"></div>
+        </div>
+      </aside>
+
+      <ul class="bottom-toc opacity-100 [&:not(.active)]:opacity-0 [&:not(.active)]:pointer-events-none fixed z-20 bottom-6 w-[calc(100%-40px)] p-2 bg-lightest border border-dashed border-green-dark rounded-md space-y-4 transition-opacity cursor-pointer">
+        <li class="bottom-toc-item flex gap-2 bg-green-light border border-green-dark px-2 py-px rounded pointer-events-none">
+            loading...
+        </li>
+        <li class="h-2.5 w-full p-px rounded-full bg-green-light/60 border border-green-dark">
+          <div id="bottom-post-progress" class="h-full bg-green-dark rounded-full transition-[width]" style="width: 0"></div>
+        </li>
+      </ul>
+
+      <div class="md-post">
+        <slot />
+      </div>
     </div>
   </article>
 </BaseLayout>
@@ -77,5 +99,83 @@ const { post, minutesRead } = Astro.props
     img.addEventListener('click', () => {
       img.classList.toggle('viewed')
     })
+  })
+
+  const post = document.querySelector('.md-post')
+  const postHeadings = post.querySelectorAll(':is(h2,h3)')
+  const listing = Array.from(postHeadings).map(el => ({
+    heading: parseInt(el.tagName[1]),
+    title: el.textContent,
+    hash: el.id
+  }))
+
+  const toc = document.querySelector('.table-of-contents')
+  const tocTop = toc.getBoundingClientRect().top
+  const bottomToc = document.querySelector('.bottom-toc')
+
+  let lastH2 = null
+  let h2Count = 1
+  let h3Count = 1
+
+  toc.innerHTML = listing.map(el => {
+    const html = `
+      <li class="toc-item flex gap-2 [.active]:bg-green-light border border-transparent [.active]:border-green-dark px-2 py-px rounded hover:bg-green-light/70 transition-colors">
+        <span class="tracking-wider font-semibold">${el.heading === 2 ? `${h2Count}.` : `${h2Count-1}.${h3Count}.`}</span>
+        <a href="#${el.hash}" class="${el.heading === 2 ? 'font-semibold' : ''} flex-1">${el.title}</a>
+      </li>
+    `
+
+    if (el.heading === 2) {
+      if (lastH2 !== el) lastH2 = el
+      h2Count++
+    } else {
+      h3Count++
+    }
+
+    return html
+  }).join('')
+
+  const handleHeadingIntersection = () => {
+    const tocItems = document.querySelectorAll('.toc-item')
+    const bottomTocItem = document.querySelector('.bottom-toc-item')
+    const activeHeading = document.querySelector('.table-of-contents .active')
+
+    if (window.innerWidth < 1024 && document.documentElement.scrollTop > tocTop + toc.parentElement.clientHeight) {
+      if (!bottomToc.classList.contains('active')) bottomToc.classList.add('active')
+      document.getElementById('bottom-post-progress').style.setProperty('width', `${document.documentElement.scrollTop*100/(document.documentElement.scrollHeight-window.innerHeight-5)}%`)
+    } else {
+      if (bottomToc.classList.contains('active')) bottomToc.classList.remove('active')
+    }
+
+    document.getElementById('post-progress').style.setProperty('width', `${document.documentElement.scrollTop*100/(document.documentElement.scrollHeight-window.innerHeight-5)}%`)
+
+    if (document.documentElement.scrollTop > document.documentElement.scrollHeight-window.innerHeight-5) {
+      tocItems.forEach(item => {
+        if (tocItems[tocItems.length-1] === item) {
+          item.classList.add('active')
+        } else {
+          item.classList.remove('active')
+        }
+      })
+    } else {
+      postHeadings.forEach(heading => {
+        if (heading.getBoundingClientRect().top < 32) {
+          tocItems.forEach(item => {
+            const itemHash = item.querySelector('a').href.split('#')[1]
+            if (itemHash === heading.id) {
+              item.classList.add('active')
+            } else {
+              item.classList.remove('active')
+            }
+          })
+        }
+      })
+    }
+    bottomTocItem.innerHTML = activeHeading.innerHTML
+  }
+
+  document.addEventListener('scroll', handleHeadingIntersection)
+  bottomToc.addEventListener('click', () => {
+    document.documentElement.scrollTo({top: tocTop-32})
   })
 </script>

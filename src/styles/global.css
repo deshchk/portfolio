@@ -115,10 +115,10 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
 }
 
 .md-post {
-  @apply min-[960px]:mx-24;
+  /*@apply min-[960px]:mx-24;*/
 
   & h2 {
-    @apply font-bold text-2xl mt-[1.5lh] mb-[.5lh];
+    @apply font-bold text-2xl mb-[.5lh];
   }
 
   & h3 {
