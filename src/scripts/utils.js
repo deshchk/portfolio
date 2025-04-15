@@ -19,6 +19,8 @@ export const rFrom = array => array[getR(array.length)]
 export const formatDate = dateString => new Intl.DateTimeFormat('en-AU').format(new Date(dateString))
 // time since date
 export const timeElapsed = (dateString, options = null) => {
+  if (options === null) options = { y: true, m: true, d: true, mRoundUp: false }
+
   const inputDate = new Date(dateString)
 
   if (isNaN(inputDate.getTime())) {
@@ -27,9 +29,10 @@ export const timeElapsed = (dateString, options = null) => {
 
   const currentDate = new Date()
 
-  let years = currentDate.getFullYear() - inputDate.getFullYear()
-  let months = currentDate.getMonth() - inputDate.getMonth()
+
   let days = currentDate.getDate() - inputDate.getDate()
+  let months = options.mRoundUp && days > 7 ? currentDate.getMonth() - inputDate.getMonth() +1 : currentDate.getMonth() - inputDate.getMonth()
+  let years = months === 12 ? currentDate.getFullYear() - inputDate.getFullYear() +1 : currentDate.getFullYear() - inputDate.getFullYear()
 
   if (days < 0) {
     const lastDayOfPrevMonth = new Date(
@@ -46,8 +49,6 @@ export const timeElapsed = (dateString, options = null) => {
     years--
     months += 12
   }
-
-  if (options === null) options = { y: true, m:true, d:true }
 
   const parts = []
   if (options.y && years > 0) parts.push(`${years}${years === 1 ? 'yr' : 'yrs'}`)

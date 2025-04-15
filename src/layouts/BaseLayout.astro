@@ -1,6 +1,7 @@
 ---
 import Header from '@/components/Header.astro'
 import Footer from '@/components/Footer.astro'
+import Shadow from '@/components/Shadow.astro'
 import '@fontsource-variable/montserrat'
 import '@fontsource-variable/open-sans'
 import '@/styles/global.css'
@@ -16,7 +17,7 @@ const { pageTitle } = Astro.props
     <meta name="description" content="Daniel Leszczak – personal website with portfolio">
     <title>{`${pageTitle} – Leszczak.pl`}</title>
   </head>
-  <body style="opacity: 0; transition-property: opacity; transition-duration: 1s;">
+  <body style="opacity: 0; transition-property: opacity; transition-duration: 1s;" class="group/body">
     <Header />
 
     <main class="mx-1">
@@ -24,6 +25,8 @@ const { pageTitle } = Astro.props
     </main>
 
     <Footer />
+
+    <Shadow />
 
     <script>
       import "@/scripts/global.js"

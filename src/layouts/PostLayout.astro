@@ -9,7 +9,7 @@ const { post, minutesRead } = Astro.props
   <article class="flex flex-col mt-10 mb-20">
     <div class="relative mb-8">
       <Image
-        class="size-full aspect-video md:aspect-2/1 object-cover select-none rounded-lg"
+        class="size-full aspect-video md:aspect-2/1 object-cover select-none rounded-xl"
         src={post.image.url} alt={post.image.alt}
         width="100%" height="100%"
         loading="eager"
@@ -53,8 +53,6 @@ const { post, minutesRead } = Astro.props
         }
       </div>
 
-      <!--<hr class="md:hidden border-0 border-b border-green-light" />-->
-
       <ul class="max-sm:mt-1 self-end flex md:flex-col flex-wrap gap-x-5 gap-y-1 md:gap-1 sm:max-md:justify-end sm:items-end text-green-darkest max-md:text-sm">
         <li class={`${post.modDate ? 'opacity-50' : 'opacity-100'}`}>
           Published: <span class="text-darkest tracking-wide font-medium">{formatDate(post.pubDate)}</span>
@@ -67,11 +65,17 @@ const { post, minutesRead } = Astro.props
       </ul>
     </div>
 
-    <div class="md-post mt-20">
+    <div class="md-post mt-14 sm:mt-20">
       <slot />
     </div>
   </article>
 </BaseLayout>
 
-<style>
-</style>
+<script>
+  const galleryImgs = document.querySelectorAll('.post-gallery img')
+  galleryImgs.forEach(img => {
+    img.addEventListener('click', () => {
+      img.classList.toggle('viewed')
+    })
+  })
+</script>

@@ -7,6 +7,7 @@
   --color-green-light: rgb(191 227 198);
   --color-green: rgb(143, 204, 143);
   --color-green-dark: rgb(83, 178, 76);
+  --color-green-darker: rgb(44, 128, 38);
   --color-green-darkest: rgb(51, 64, 51);
   --color-blue-light: rgb(153, 167, 191);
   --color-blue: rgb(50 78 143);
@@ -16,6 +17,7 @@
   --font-os: 'Open Sans Variable', sans-serif;
   --font-ms: 'Montserrat Variable', sans-serif;
   --inset-shadow-b: inset 0 0 6px var(--tw-inset-shadow-color);
+  --ul-marker: '–  ';
 }
 
 /* noinspection CssInvalidAtRule */
@@ -30,7 +32,7 @@
 }
 
 html {
-  overflow-y: scroll;
+  @apply overflow-y-scroll scroll-smooth scroll-pt-5;
   margin-left: calc(100vw - 100%);
 }
 
@@ -50,6 +52,16 @@ body {
 
 :is(h1, h2, h3, h4, h5, h6) {
   font-family: 'Montserrat Variable', sans-serif;
+  @apply relative;
+
+  &:target {
+    @apply text-green-dark;
+
+    &:before {
+      content: '';
+      @apply absolute -left-5 top-1/2 -translate-y-1/2 [border-left:8px_solid_var(--color-green-dark)] [border-bottom:8px_solid_transparent] rotate-135;
+    }
+  }
 }
 
 .greeting-button {
@@ -103,28 +115,126 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
 }
 
 .md-post {
+  @apply min-[960px]:mx-24;
+
   & h2 {
-    @apply font-bold text-xl mt-[1.5lh] mb-[.5lh];
+    @apply font-bold text-2xl mt-[1.5lh] mb-[.5lh];
+  }
+
+  & h3 {
+    @apply font-bold text-xl mt-[1lh] mb-[.5lh];
+  }
+
+  & big {
+    @apply block font-medium text-xl my-[1.5lh] md:mx-auto max-w-[50ch] italic mx-4 sm:mx-8;
   }
 
   & p {
-    @apply mb-[1lh];
+    @apply mb-[1lh] leading-[1.65];
   }
 
   & ol {
-    @apply list-decimal ml-4;
+    @apply list-decimal ml-4 mb-5;
+
+    & ::marker {
+      @apply text-green-darker;
+    }
+
+    & li {
+      @apply pl-1;
+    }
   }
 
   & ul {
-    @apply list-disc ml-4;
+    @apply list-(--ul-marker) ml-4 mb-5;
+
+    & ::marker {
+      @apply text-green-dark;
+    }
   }
 
-  & li p {
+  & li {
     @apply mb-[.25lh];
+
+    & p {
+      @apply m-0;
+    }
+
+    & ul, & ol {
+      @apply mt-[.25lh] mb-0;
+    }
   }
 
   & code {
     @apply inline-block px-2 py-px mx-px bg-green-light/50 rounded-md;
+  }
+
+  & p a, & li a {
+    @apply text-blue font-medium border-b border-dashed border-transparent outline-none transition-colors px-px;
+
+    &:hover, &:focus {
+      @apply border-blue;
+    }
+  }
+
+  & :is(h2 a, h3 a, h4 a, h5 a, h6 a) {
+    @apply border-b border-dashed border-transparent outline-none transition-colors;
+
+    &:hover, &:focus {
+      @apply border-green-dark;
+    }
+  }
+
+  & em {
+    @apply text-green-darker;
+  }
+
+  & hr {
+    @apply border-0 border-b border-green-light my-[2lh] w-40 mx-auto;
+  }
+
+  & img {
+    @apply block m-auto p-1.5 border border-green rounded-xs;
+
+    &[src*='#left'] {
+      @apply max-md:hidden md:float-left md:m-6 md:ml-0 md:mt-2 md:max-w-[calc(50%_-_1.5rem)];
+    }
+    &[src*='#right'] {
+      @apply max-md:hidden md:float-right md:m-6 md:mr-0 md:mt-2 md:max-w-[calc(50%_-_1.5rem)];
+    }
+    &[src*='#mobile'] {
+      @apply md:hidden mb-6;
+    }
+  }
+
+  & .post-gallery {
+    @apply py-6 px-6.5 bg-green-light rounded-xl inset-shadow-sm inset-shadow-green-dark/40 mb-4;
+
+    & .post-gallery-wrapper {
+      @apply grid grid-cols-[repeat(auto-fit,200px)] justify-between gap-6;
+
+      & img {
+        @apply cursor-pointer transition-all;
+      }
+
+      & img:not(.viewed) {
+        @apply size-50 aspect-square object-cover p-0 border-none rounded-lg;
+
+        &:hover {
+          @apply scale-105;
+        }
+      }
+
+      &:has(img:hover) {
+        & img:not(:hover) {
+          @apply opacity-80;
+        }
+      }
+
+      & img.viewed {
+        @apply fixed z-40 inset-0 h-[80%] p-0 rounded-lg;
+      }
+    }
   }
 }
 
@@ -172,3 +282,4 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
     transform: rotate(0) translateY(0);
   }
 }
+
