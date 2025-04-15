@@ -214,7 +214,7 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
       @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 justify-between gap-6;
 
       & img {
-        @apply cursor-pointer transition-all;
+        @apply cursor-pointer transition-[scale,opacity];
       }
 
       & img:not(.viewed) {
