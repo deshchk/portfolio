@@ -171,7 +171,8 @@ const { post, minutesRead } = Astro.props
         }
       })
     }
-    bottomTocItem.innerHTML = activeHeading.innerHTML
+    if (window.location.hash !== '') bottomTocItem.innerHTML = document.querySelector(`.table-of-contents .toc-item:has(a[href='${window.location.hash}'])`).innerHTML
+    if (activeHeading) bottomTocItem.innerHTML = activeHeading.innerHTML
   }
 
   document.addEventListener('scroll', handleHeadingIntersection)
