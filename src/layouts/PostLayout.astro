@@ -127,6 +127,7 @@ const { post, minutesRead } = Astro.props
     if (el.heading === 2) {
       if (lastH2 !== el) lastH2 = el
       h2Count++
+      h3Count = 1
     } else {
       h3Count++
     }
