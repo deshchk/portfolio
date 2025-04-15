@@ -6,12 +6,12 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 
 <BaseLayout pageTitle="About me">
   <div class="text-center my-20">
-    <figure class="w-[450px] mx-auto">
-      <div class="relative grid place-items-center h-[300px] rounded-lg overflow-hidden">
+    <figure class="max-w-[450px] mx-auto">
+      <div class="relative grid place-items-center h-[300px] overflow-hidden">
         <span class="relative bottom-14 text-2xl font-medium text-white bg-darkest px-4 py-1.5 rounded">
           Work in progress
         </span>
-        <Image src="/dog-wip.webp" alt="Photo of brown dog lying on concrete" width="450" height="300" loading="eager" class="absolute -z-1" />
+        <Image src="/dog-wip.webp" alt="Photo of brown dog lying on concrete" width="450" height="300" loading="eager" class="absolute -z-1 rounded-lg" />
       </div>
       <figcaption>
         <a href="https://www.pexels.com/photo/photo-of-brown-dog-lying-on-concrete-1737357/"
