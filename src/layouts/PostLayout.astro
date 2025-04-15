@@ -19,7 +19,6 @@ const { post, minutesRead } = Astro.props
       </p>
     </div>
 
-
     <div class="grid md:grid-cols-[1fr_auto] gap-5">
       <ul class="col-span-full flex flex-wrap gap-x-2 gap-y-4 text-xs">
         {post.tags.map(tag => (
@@ -77,19 +76,19 @@ const { post, minutesRead } = Astro.props
         </div>
       </aside>
 
-      <ul class="bottom-toc opacity-100 [&:not(.active)]:opacity-0 [&:not(.active)]:pointer-events-none fixed z-20 bottom-6 w-[calc(100%-40px)] p-2 bg-lightest border border-dashed border-green-dark rounded-md space-y-4 transition-opacity cursor-pointer">
-        <li class="bottom-toc-item flex gap-2 bg-green-light border border-green-dark px-2 py-px rounded pointer-events-none">
-            loading...
-        </li>
-        <li class="h-2.5 w-full p-px rounded-full bg-green-light/60 border border-green-dark">
-          <div id="bottom-post-progress" class="h-full bg-green-dark rounded-full transition-[width]" style="width: 0"></div>
-        </li>
-      </ul>
-
       <div class="md-post">
         <slot />
       </div>
     </div>
+
+    <ul class="mx-auto mt-10 max-w-[450px] lg:hidden bottom-toc opacity-100 [&:not(.active)]:opacity-0 [&:not(.active)]:pointer-events-none sticky z-20 bottom-6 w-full p-2 bg-lightest border border-dashed border-green-dark rounded-md space-y-4 transition-opacity cursor-pointer">
+      <li class="bottom-toc-item flex gap-2 bg-green-light border border-green-dark px-2 py-px rounded pointer-events-none">
+        loading...
+      </li>
+      <li class="h-2.5 w-full p-px rounded-full bg-green-light/60 border border-green-dark">
+        <div id="bottom-post-progress" class="h-full bg-green-dark rounded-full transition-[width]" style="width: 0"></div>
+      </li>
+    </ul>
   </article>
 </BaseLayout>
 
