@@ -6,8 +6,13 @@ export default function NavigationItem({ data, open }) {
   const [sm, setSm ] = useState(false)
 
   useEffect(() => {
-    console.log(location.pathname, data.path)
-    if (location.pathname === data.path) el.current.classList.add('active')
+    const activePath = location.pathname.replaceAll('/','')
+    if (activePath && data.path.includes(activePath)) {
+      el.current.classList.add('active')
+    } else if (!activePath && data.path === '/') {
+      el.current.classList.add('active')
+    }
+
     function setBreakpoint() {
       if (window.innerWidth < 640) {
         setSm(true)
