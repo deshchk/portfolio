@@ -9,9 +9,9 @@ import { formatDate, timeElapsed } from '@/scripts/utils'
 import Stars from '@@/stars.svg'
 import Pointer from '@@/pointer.svg'
 
-const blogPosts = await getCollection('blog')
-blogPosts.sort((a, b) => new Date(a.data.pubDate) - new Date(b.data.pubDate))
-const newestPost = blogPosts.toReversed()[0]
+const rawPosts = await getCollection('blog')
+const blogPosts = rawPosts.filter(post => !post.data.tags.includes('eol')).sort((a, b) => new Date(a.data.pubDate) - new Date(b.data.pubDate)).reverse()
+const newestPost = blogPosts[0]
 
 const status = {
 	workplace: {name: 'Dotandspot sp. z o.o.', url: 'https://dotandspot.pl/', since: '2024-06-03'},
@@ -95,7 +95,7 @@ const status = {
 									<a href={status.workplace.url} target="_blank" class="outline-transparent focus:outline-darkest outline-1 outline-dashed outline-offset-2">{status.workplace.name}</a>
 								</li>
 								<li class="space-x-3 text-xs tracking-wide">
-									<span class="text-blue">since {formatDate(status.workplace.since)}</span> <span class="font-semibold">{timeElapsed(status.workplace.since, { y:true, m: true, d: true, mRoundUp: true })}</span>
+									<span class="text-blue">since {formatDate(status.workplace.since)}</span> <span class="font-semibold">{timeElapsed(status.workplace.since, { y:true, m: true, mRoundUp: true })}</span>
 								</li>
 							</ul>
 						</li>

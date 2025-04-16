@@ -130,7 +130,11 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
   }
 
   & p {
-    @apply mb-[1lh] leading-[1.65];
+    @apply leading-[1.65] mb-[.25lh];
+
+    &:not(:has(+ :is(ol, ul))) {
+      @apply mb-[1lh];
+    }
   }
 
   & ol {

@@ -1,14 +1,17 @@
 ---
 title: "Pelky – Psychological PWA tracker made with React"
-description: "Creating mobile progressive web app (PWA) tracker with React, React Router and TailwindCSS"
-author: "Daniel Leszczak"
+description: "Creating mobile progressive web app (PWA) tracker with React, React Router and TailwindCSS."
 image:
     url: "/posts/images/pelky/hero.webp"
     alt: "The Pelky logo on a dark blue background with a text below it saying 'drop by yourself and see what's changed'."
 pubDate: 2025-04-06
 modDate: 2025-04-14
 link: "https://pelky.leszczak.pl"
-tags: ["react", "tailwindcss", "react router", "vite-plugin-pwa", "vite", "psychology", "mobile"]
+tags: [
+  "react", "tailwindcss", "react router", "vite-plugin-pwa", "vite", "mobile",
+  "psychology", "self-reflection", "self-knowledge", "self-awareness", "mindfulness", "journaling"
+]
+ready: true
 ---
 
 ## [TLDR](#tldr)

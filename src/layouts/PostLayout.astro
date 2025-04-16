@@ -23,7 +23,7 @@ const { post, minutesRead } = Astro.props
       <ul class="col-span-full flex flex-wrap gap-x-2 gap-y-4 text-xs">
         {post.tags.map(tag => (
           <li>
-            <a href={`/tags/${tag}`} class="shrink-0 px-2.5 py-0.5 bg-green-light/60 rounded-full hover:bg-green-dark hover:text-white outline-1 outline-offset-1 outline-transparent focus:outline-green-dark transition-all">
+            <a href={`/tags/${tag}`} class={`shrink-0 px-2.5 py-0.5 rounded-full ${tag === 'eol' ? 'uppercase bg-purple text-white hover:bg-purple-dark focus:outline-purple-dark' : 'bg-green-light/60 hover:bg-green-darker focus:outline-green-darker hover:text-white'} outline-1 outline-offset-1 outline-transparent transition-all`}>
               {tag}
             </a>
           </li>
@@ -42,7 +42,7 @@ const { post, minutesRead } = Astro.props
         {post.link &&
           <p>
             Visit:
-            <a href={post.link} class=`
+            <a href={post.link} target="_blank" class=`
               text-blue font-medium outline-offset-3 outline-1 outline-dashed outline-transparent
               hover:outline-blue-light focus:outline-blue-light [transition:outline-color_.2s]
             `>
@@ -118,7 +118,7 @@ const { post, minutesRead } = Astro.props
 
   toc.innerHTML = listing.map(el => {
     const html = `
-      <li class="toc-item flex gap-2 [.active]:bg-green-light border border-transparent [.active]:border-green-dark px-2 py-px rounded hover:bg-green-light/70 transition-colors">
+      <li class="toc-item flex gap-2 [.active]:bg-green-light border border-transparent [.active]:border-green-dark px-2 py-px rounded hover:bg-green-light/70 transition-colors select-none">
         <span class="tracking-wider font-semibold">${el.heading === 2 ? `${h2Count}.` : `${h2Count-1}.${h3Count}.`}</span>
         <a href="#${el.hash}" class="${el.heading === 2 ? 'font-semibold' : ''} flex-1">${el.title}</a>
       </li>
@@ -139,15 +139,17 @@ const { post, minutesRead } = Astro.props
     const tocItems = document.querySelectorAll('.toc-item')
     const bottomTocItem = document.querySelector('.bottom-toc-item')
     const activeHeading = document.querySelector('.table-of-contents .active')
+    const postTop = document.querySelector('.md-post').getBoundingClientRect().top
+    const postHeight = document.documentElement.scrollHeight-window.innerHeight-postTop-5
 
     if (window.innerWidth < 1024 && document.documentElement.scrollTop > tocTop + toc.parentElement.clientHeight) {
       if (!bottomToc.classList.contains('active')) bottomToc.classList.add('active')
-      document.getElementById('bottom-post-progress').style.setProperty('width', `${document.documentElement.scrollTop*100/(document.documentElement.scrollHeight-window.innerHeight-5)}%`)
+      document.getElementById('bottom-post-progress').style.setProperty('width', `${Math.floor((document.documentElement.scrollTop-postTop)*100/postHeight)}%`)
     } else {
       if (bottomToc.classList.contains('active')) bottomToc.classList.remove('active')
     }
 
-    document.getElementById('post-progress').style.setProperty('width', `${document.documentElement.scrollTop*100/(document.documentElement.scrollHeight-window.innerHeight-5)}%`)
+    document.getElementById('post-progress').style.setProperty('width', `${Math.floor((document.documentElement.scrollTop-postTop)*100/postHeight)}%`)
 
     if (document.documentElement.scrollTop > document.documentElement.scrollHeight-window.innerHeight-5) {
       tocItems.forEach(item => {

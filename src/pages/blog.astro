@@ -5,15 +5,46 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import PostCard from '@/components/PostCard.astro'
 
 const blogPosts = await getCollection('blog')
-blogPosts.sort((a, b) => Date.parse(a.data.pubDate) - Date.parse(b.data.pubDate)).reverse()
+blogPosts.sort((a, b) => new Date(a.data.pubDate) - new Date(b.data.pubDate)).reverse()
 ---
 
 <BaseLayout pageTitle="Blog">
-  <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 mt-10 md:mt-20">
-    {blogPosts.map(post => (
-      <li>
-        <PostCard post={post} />
-      </li>
-    ))}
-  </ul>
+  <section class="space-y-4 mt-10 md:mt-20">
+    <h2 class="text-2xl font-bold">Active projects</h2>
+    <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {blogPosts.map(post => (post.data.ready && !post.data.tags.includes('eol')) && (
+        <li>
+          <PostCard post={post} />
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="space-y-4 mt-10 md:mt-20">
+    <h2 class="text-2xl font-bold">Upcoming posts</h2>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        {blogPosts.filter(post => !post.data.ready).length > 0 ?
+          blogPosts.map(post => (
+            <li class="grayscale-0.5 hover:grayscale-0 transition-[filter]">
+              <PostCard post={post} className="pointer-events-none" />
+            </li>
+          )) : (
+            <li class="col-span-full text-darkest/60">There are none in the pipeline for now :)</li>
+          )
+        }
+      </ul>
+  </section>
+
+  {
+    <section class="space-y-4 mt-10 md:mt-20 mb-20">
+      <h2 class="text-2xl font-bold text-purple">Past projects</h2>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        {blogPosts.map(post => post.data.tags.includes('eol') && (
+          <li>
+            <PostCard post={post} className="!border-purple hover:!outline-purple focus-within:!outline-purple" />
+          </li>
+        ))}
+      </ul>
+    </section>
+  }
 </BaseLayout>
