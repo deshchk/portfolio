@@ -7,8 +7,8 @@ image:
 pubDate: 2025-04-16
 link: "https://redir.leszczak.pl/rankit"
 tags: [
-  "eol", "vanilla js", "tailwindcss",
-  "psychology", "self-reflection", "self-knowledge", "self-awareness", "self-tracking", "decision making", "identity formation"
+  "eol", "javascript", "tailwindcss",
+  "psychology", "self-reflection", "self-knowledge", "self-awareness", "self-tracking", "decision-making", "identity-formation"
 ]
 ready: true
 ---

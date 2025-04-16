@@ -43,10 +43,10 @@ export default function TagsList({ tags }) {
   return (
     <ul
       ref={tagList}
-      className="[container-type:inline-size] group flex gap-x-2 text-xs overflow-auto invisible-scroll mt-auto pr-12 cursor-grab mask-r-from-black mask-r-from-80% mask-r-to-transparent focus:outline-none"
+      className="[container-type:inline-size] group flex gap-x-2 text-xs overflow-auto invisible-scroll mt-auto pr-12 cursor-grab mask-r-from-black mask-r-from-80% mask-r-to-transparent focus:outline-none pointer-events-auto"
     >
       {tags.map(tag => (
-        <li className={`shrink-0 px-2.5 py-0.5 ${tag === 'eol' ? 'uppercase bg-purple text-white group-focus:bg-purple-dark' : 'bg-green-light/60 group-focus:bg-green-light'} rounded-full`}>{tag}</li>
+        <li className={`shrink-0 px-2.5 py-0.5 ${tag === 'eol' ? 'uppercase bg-purple text-white group-focus:bg-purple-dark' : 'bg-green-light/60 group-focus:bg-green-light'} rounded-full select-none`}>{tag}</li>
       ))}
     </ul>
   )

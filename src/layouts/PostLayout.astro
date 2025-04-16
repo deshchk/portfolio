@@ -144,12 +144,12 @@ const { post, minutesRead } = Astro.props
 
     if (window.innerWidth < 1024 && document.documentElement.scrollTop > tocTop + toc.parentElement.clientHeight) {
       if (!bottomToc.classList.contains('active')) bottomToc.classList.add('active')
-      document.getElementById('bottom-post-progress').style.setProperty('width', `${Math.floor((document.documentElement.scrollTop-postTop)*100/postHeight)}%`)
+      document.getElementById('bottom-post-progress').style.setProperty('width', `${Math.min(Math.floor((document.documentElement.scrollTop-postTop)*100/postHeight),100)}%`)
     } else {
       if (bottomToc.classList.contains('active')) bottomToc.classList.remove('active')
     }
 
-    document.getElementById('post-progress').style.setProperty('width', `${Math.floor((document.documentElement.scrollTop-postTop)*100/postHeight)}%`)
+    document.getElementById('post-progress').style.setProperty('width', `${Math.min(Math.floor((document.documentElement.scrollTop-postTop)*100/postHeight),100)}%`)
 
     if (document.documentElement.scrollTop > document.documentElement.scrollHeight-window.innerHeight-5) {
       tocItems.forEach(item => {

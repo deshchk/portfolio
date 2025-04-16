@@ -8,7 +8,7 @@ pubDate: 2025-04-06
 modDate: 2025-04-14
 link: "https://pelky.leszczak.pl"
 tags: [
-  "react", "tailwindcss", "react router", "vite-plugin-pwa", "vite", "mobile",
+  "react", "tailwindcss", "react-router", "vite-plugin-pwa", "vite", "pwa", "mobile",
   "psychology", "self-reflection", "self-knowledge", "self-awareness", "mindfulness", "journaling"
 ]
 ready: true

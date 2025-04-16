@@ -24,8 +24,11 @@ blogPosts.sort((a, b) => new Date(a.data.pubDate) - new Date(b.data.pubDate)).re
     <h2 class="text-2xl font-bold">Upcoming posts</h2>
       <ul class="grid min-[510px]:grid-cols-2 min-[754px]:grid-cols-3 lg:grid-cols-4 gap-6">
         {blogPosts.filter(post => !post.data.ready).length > 0 ?
-          blogPosts.map(post => (
-            <li class="grayscale-0.5 hover:grayscale-0 transition-[filter]">
+          blogPosts.filter(post => !post.data.ready).map(post => (
+            <li class="grayscale opacity-80">
+              <a href={post.data.link} target="_blank" class="opacity-100 [&:not(:is(:hover,:focus))]:opacity-0 absolute inset-0 bg-white/40 rounded-lg grid place-items-center outline-none transition-opacity">
+                <span class="text-xl font-semibold text-white bg-darkest px-4 py-0.5 rounded">Visit</span>
+              </a>
               <PostCard post={post} className="pointer-events-none" />
             </li>
           )) : (
@@ -39,7 +42,7 @@ blogPosts.sort((a, b) => new Date(a.data.pubDate) - new Date(b.data.pubDate)).re
     <section class="space-y-4 mt-10 md:mt-20 mb-20">
       <h2 class="text-2xl font-bold text-purple">Past projects</h2>
       <ul class="grid min-[510px]:grid-cols-2 min-[754px]:grid-cols-3 lg:grid-cols-4 gap-6">
-        {blogPosts.map(post => post.data.tags.includes('eol') && (
+        {blogPosts.filter(post => post.data.ready).map(post => post.data.tags.includes('eol') && (
           <li>
             <PostCard post={post} className="!border-purple hover:!outline-purple focus-within:!outline-purple" />
           </li>
