@@ -6,6 +6,7 @@ export default function NavigationItem({ data, open }) {
   const [sm, setSm ] = useState(false)
 
   useEffect(() => {
+    console.log(location.pathname, data.path)
     if (location.pathname === data.path) el.current.classList.add('active')
     function setBreakpoint() {
       if (window.innerWidth < 640) {
