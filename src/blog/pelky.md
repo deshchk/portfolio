@@ -1,5 +1,5 @@
 ---
-title: "Pelky – Psychological PWA tracker made with React"
+title: "Pelky – Psychological tracker made with React"
 description: "Creating mobile progressive web app (PWA) tracker with React, React Router and TailwindCSS."
 image:
     url: "/posts/images/pelky/hero.webp"
