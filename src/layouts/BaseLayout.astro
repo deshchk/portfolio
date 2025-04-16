@@ -6,7 +6,7 @@ import '@fontsource-variable/montserrat'
 import '@fontsource-variable/open-sans'
 import '@/styles/global.css'
 
-const { pageTitle } = Astro.props
+const { pageTitle, postImage = null } = Astro.props
 ---
 <html lang="en" class="custom-scroll-thumb">
   <head>
@@ -15,6 +15,10 @@ const { pageTitle } = Astro.props
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content="Daniel Leszczak – personal website with portfolio">
+    {postImage &&
+      <meta property="og:image" content={postImage} />
+      <meta name="twitter:image" content={postImage} />
+    }
     <title>{`${pageTitle} – Leszczak.pl`}</title>
   </head>
   <body style="opacity: 0; transition-property: opacity; transition-duration: 1s;" class="group/body">

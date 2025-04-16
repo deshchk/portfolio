@@ -5,7 +5,7 @@ import { formatDate } from '@/scripts/utils'
 
 const { post, minutesRead } = Astro.props
 ---
-<BaseLayout pageTitle={post.title}>
+<BaseLayout pageTitle={post.title} postImage={post.image.url}>
   <article class="flex flex-col mt-10 mb-20">
     <div class="relative mb-8">
       <Image
@@ -65,8 +65,8 @@ const { post, minutesRead } = Astro.props
     </div>
 
     <div class="grid lg:grid-cols-[auto_1fr] gap-10 mt-14 sm:mt-20">
-      <aside class="lg:sticky top-6 lg:top-10 z-20 h-fit p-2 bg-lightest border border-dashed border-green-dark rounded-md space-y-4">
-        <ul class="table-of-contents group/ul lg:max-w-[320px] space-y-1">
+      <aside class="lg:sticky top-6 lg:top-10 z-20 h-fit lg:w-[271px] p-2 bg-lightest border border-dashed border-green-dark rounded-md space-y-4">
+        <ul class="table-of-contents group/ul space-y-1">
           <li>
             loading...
           </li>
@@ -76,7 +76,7 @@ const { post, minutesRead } = Astro.props
         </div>
       </aside>
 
-      <div class="md-post">
+      <div class="md-post lg:max-w-2xl">
         <slot />
       </div>
     </div>

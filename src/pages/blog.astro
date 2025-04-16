@@ -22,7 +22,7 @@ blogPosts.sort((a, b) => new Date(a.data.pubDate) - new Date(b.data.pubDate)).re
 
   <section class="space-y-4 mt-10 md:mt-20">
     <h2 class="text-2xl font-bold">Upcoming posts</h2>
-      <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <ul class="grid min-[510px]:grid-cols-2 min-[754px]:grid-cols-3 lg:grid-cols-4 gap-6">
         {blogPosts.filter(post => !post.data.ready).length > 0 ?
           blogPosts.map(post => (
             <li class="grayscale-0.5 hover:grayscale-0 transition-[filter]">
@@ -38,7 +38,7 @@ blogPosts.sort((a, b) => new Date(a.data.pubDate) - new Date(b.data.pubDate)).re
   {
     <section class="space-y-4 mt-10 md:mt-20 mb-20">
       <h2 class="text-2xl font-bold text-purple">Past projects</h2>
-      <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <ul class="grid min-[510px]:grid-cols-2 min-[754px]:grid-cols-3 lg:grid-cols-4 gap-6">
         {blogPosts.map(post => post.data.tags.includes('eol') && (
           <li>
             <PostCard post={post} className="!border-purple hover:!outline-purple focus-within:!outline-purple" />
