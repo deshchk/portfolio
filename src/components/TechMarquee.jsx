@@ -36,6 +36,7 @@ export default function TechMarquee() {
     {name: 'HTML', img: './logos/html.svg', url: 'https://html.spec.whatwg.org/multipage/'},
     {name: 'CSS', img: './logos/css.svg', url: 'https://www.w3.org/Style/CSS/Overview.en.html'},
     {name: 'Javascript', img: './logos/js.svg', url: 'https://ecma-international.org/publications-and-standards/standards/ecma-262/'},
+    {name: 'TypeScript', img: './logos/ts.svg', url: 'https://www.typescriptlang.org/'},
     {name: 'React', img: './logos/react.svg', url: 'https://react.dev/'},
     {name: 'TailwindCSS', img: './logos/tailwind.svg', url: 'https://www.w3.org/Style/CSS/Overview.en.html'},
     {name: 'Vue.js', img: './logos/vue.svg', url: 'https://vuejs.org/'},

@@ -245,15 +245,12 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
 
 
 .invisible-scroll {
-  @apply [scrollbar-color:transparent_transparent];
-  @apply [&::-webkit-scrollbar]:bg-transparent [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar-thumb]:bg-transparent;
-  @supports (scrollbar-color: black black) {
-    scrollbar-width: none;
-  }
-
+  scrollbar-color: transparent transparent;
   -webkit-overflow-scrolling: touch;
-  &::-webkit-scrollbar { @apply !hidden }
-  & ::-webkit-scrollbar { @apply !hidden }
+  &::-webkit-scrollbar { @apply !hidden bg-transparent w-0 }
+  & ::-webkit-scrollbar { @apply !hidden bg-transparent w-0 }
+  &::-webkit-scrollbar-thumb { @apply bg-transparent }
+  @supports (scrollbar-color: black black) { scrollbar-width: none }
 }
 
 .custom-scroll-thumb {

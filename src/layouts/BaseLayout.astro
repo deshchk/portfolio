@@ -40,3 +40,19 @@ const { pageTitle, postImage = null } = Astro.props
     </script>
   </body>
 </html>
+
+
+<div class="bg-sky-950 flex justify-between items-center">
+  <div>
+    <slot name="title" />
+  </div>
+
+  <div>
+    <slot name="options" />
+  </div>
+
+  <!-- notifications -->
+  <div>
+
+  </div>
+</div>
