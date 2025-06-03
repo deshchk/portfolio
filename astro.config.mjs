@@ -17,8 +17,4 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkReadingTime],
   },
-
-  experimental: {
-    svg: true,
-  }
 })
