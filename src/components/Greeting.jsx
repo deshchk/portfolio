@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from 'preact/hooks'
 import { on } from "@scripts/utils"
 
 export default function Greeting({ messages }) {
-  const timeout = useRef(null)
+  const globalTimeout = useRef(null)
+  const localTimeout = useRef(null)
   const nextWidth = useRef(0)
 
   const currentGreeting = useRef(null)
@@ -33,12 +34,12 @@ export default function Greeting({ messages }) {
   }
 
   function changeGreeting() {
-    if (timeout.current) {
-      clearTimeout(timeout.current)
-    }
+    globalTimeout.current &&clearTimeout(globalTimeout.current)
+    localTimeout.current && clearTimeout(localTimeout.current)
+
     setGreetingSwap(true)
     greetingWrapper.current.style.setProperty('grid-template-columns', `${nextWidth.current+1}px auto`)
-    setTimeout(() => {
+    localTimeout.current = setTimeout(() => {
       setNewGreeting()
       waveHand()
       setGreetingSwap(false)
@@ -46,11 +47,14 @@ export default function Greeting({ messages }) {
   }
 
   useEffect(() => {
-    timeout.current = setTimeout(() => {
+    globalTimeout.current = setTimeout(() => {
       changeGreeting()
     }, 5000)
 
-    return () => clearTimeout(timeout.current)
+    return () => {
+      globalTimeout.current && clearTimeout(globalTimeout.current)
+      localTimeout.current && clearTimeout(localTimeout.current)
+    }
   }, [greetings])
 
   useEffect(() => {
