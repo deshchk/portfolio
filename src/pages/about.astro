@@ -1,48 +1,362 @@
 ---
-import { Image } from 'astro:assets'
+import {Image} from 'astro:assets'
 import '@/styles/global.css'
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import {timeElapsed} from '@/scripts/utils'
 ---
 
 <BaseLayout pageTitle="About me">
-  <div class="text-center my-10">
-    <figure class="max-w-[450px] mx-auto">
-      <div class="relative grid place-items-center max-h-[300px]">
-        <span class="absolute top-1/6 text-xl min-[420px]:text-2xl font-medium text-white bg-darkest px-4 py-1.5 rounded">
-          Work in progress
-        </span>
-        <Image src="/dog-wip.webp" alt="Brown dog lying on concrete" width="450" height="300" loading="eager" class="rounded-lg" />
-      </div>
-      <figcaption>
-        <a href="https://www.pexels.com/photo/photo-of-brown-dog-lying-on-concrete-1737357/"
-          target="_blank"
-          class=`
-            outline-offset-3 outline-1 outline-dashed outline-transparent
-            focus:outline-blue-light [transition:outline-color_.2s] px-1.5
-        `>
-          <small><span class="text-xs opacity-50">Photo by </span>Víctor Panadeiros</small>
-        </a>
-      </figcaption>
-    </figure>
+    <div class="my-10">
+        <section class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <Image src="/profile.webp" width="200" height="200" alt="my smiling face"
+                   class="aspect-square w-1/2 sm:size-full object-cover sm:row-start-1 sm:row-end-2 min-[1100px]:row-end-3 rounded-lg"
+                   loading="eager"/>
 
-    <p class="mt-10">
-      Until I finish this page, you can check my <a href="https://linkedin.com/in/leszczak" target="_blank" class=`
-        font-medium text-[#0b66c2] mx-1 px-1
-        outline-offset-3 outline-1 outline-dashed outline-transparent hover:outline-blue-light
-        focus:outline-blue-light [transition:outline-color_.2s]
-      `>
-        LinkedIn profile</a> 👀
-      <span class="block">
-        ...or download my current CV:
-      </span>
-    </p>
-    <div class="grid grid-cols-2 gap-4 mt-4 max-w-xs mx-auto">
-      <a href="/pdf/Daniel%20Leszczak%20CV%20PL.pdf" class="inline-block py-2 rounded border border-red-500 bg-red-500/90 text-white transition-colors [&:is(:hover,:focus)]:bg-red-500/10 [&:is(:hover,:focus)]:text-red-500 outline-none">
-        <span class="text-xl font-bold">PL</span>
-      </a>
-      <a href="/pdf/Daniel%20Leszczak%20CV%20ENG.pdf" class="inline-block py-2 rounded border border-blue-500 bg-blue-500/90 text-white transition-colors [&:is(:hover,:focus)]:bg-blue-500/10 [&:is(:hover,:focus)]:text-blue-500 outline-none">
-        <span class="text-xl font-bold">ENG</span>
-      </a>
+            <div class="bg-green/20 rounded-lg sm:col-start-2 sm:col-end-4 md:col-end-5 lg:col-end-4 py-4 px-5 space-y-2 sm:self-end">
+                <h2 class="font-bold text-2xl">Daniel Leszczak</h2>
+                <p class="tracking-wide text-[.95rem] lg:text-base">
+                    I am a&nbsp;<strong>frontend developer</strong> and <strong>UI/UX designer</strong> with a&nbsp;unique
+                    background in <strong>psychology</strong> and <strong>academic research</strong> that allows me to create
+                    intuitive interfaces, and translate complex business requirements into user-friendly solutions.
+                </p>
+            </div>
+
+            <div class="min-[400px]:max-sm:max-w-11/12 grid rounded-lg bg-purple text-white py-4 px-5 tracking-wide max-sm:justify-self-end lg:self-end sm:max-lg:row-start-2 sm:max-lg:row-end-3 sm:max-lg:col-start-3 md:max-lg:col-end-5 grid sm:place-items-center">
+                <h3 class="font-semibold flex flex-wrap gap-x-2.5 lg:justify-self-start">
+                    Fun fact #1
+                    <span class="text-purple-dark">♫♩♪</span>
+                </h3>
+                <p class="text-sm sm:text-xs md:text-sm p-2">
+                    I&nbsp;also make beats, write lyrics, rap, sing, record and mix music, etc.
+                </p>
+                <p class="text-sm sm:text-xs md:text-sm  p-2">
+                    I&nbsp;started at 11yo and I&nbsp;still can't play any acoustic instrument well... 🙈
+                </p>
+            </div>
+
+            <div class="sm:max-[1100px]:col-start-1 sm:max-[1100px]:col-end-3 sm:row-start-2 sm:row-end-4 md:row-start-3 md:row-end-5 lg:row-start-2 min-[1000px]:col-start-2 lg:row-end-4 py-4 px-5 rounded-lg border border-green grid gap-2 place-items-center sm:grid-rows-[auto_1fr]">
+                <h3 class="text-xl md:text-base font-semibold justify-self-start">
+                    Education
+                </h3>
+                <ul class="grid gap-6 md:gap-4 h-full">
+                    <li class="grid">
+                        <small class="text-neutral-400">Opole University – 2023</small>
+                        <h4 class="font-bold tracking-wide">Psychology</h4>
+                        <small>Master's Degree</small>
+
+                        <div class="text-xs mt-2 space-y-2">
+                            <em class="block">
+                                General + Organizational psychology
+                            </em>
+                            <p class="">
+                                <em class="not-italic font-semibold">Roles and achievements:</em>
+                                class president, 4x scholar, researcher involved in interdisciplinary problem-solving;
+                                final grade 5, GPA: 4.9
+                            </p>
+                        </div>
+                    </li>
+                    <li class="grid">
+                        <small class="text-neutral-400">ZSŻŚ (Żegluga) – 2017</small>
+                        <h4 class="font-bold tracking-wide">IT Technician</h4>
+                        <small>Technical Secondary School Degree</small>
+
+                        <div class="text-xs mt-2 space-y-2">
+                            <em class="block">
+                                Frontend development + media production (graphics, video, music)
+                            </em>
+                            <p class="">
+                                <em class="not-italic font-semibold">Roles and achievements:</em>
+                                class president involved in school's on-line and off-line marketing
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="border border-blue sm:col-start-1 sm:col-end-3 sm:row-start-4 sm:row-end-7 md:col-start-3 md:col-end-5 md:row-start-3 md:row-end-8 min-[900px]:row-end-7 lg:row-start-2 lg:row-end-6 self-start py-4 px-5 rounded-lg space-y-2">
+                <h3 class="text-xl font-semibold text-blue">
+                    Experience
+                </h3>
+                <ul class="grid gap-4">
+                    <li class="grid">
+                        <small class="text-neutral-400">Dotandspot sp. z o.o.</small>
+                        <h4 class="font-bold tracking-wide">
+                            Frontend Developer & UI/UX Designer
+                            <sup class="text-blue tracking-wider">current</sup>
+                        </h4>
+                        <small>
+                            since 06.2024 –
+                            <strong class="font-semibold">
+                              {timeElapsed('2024-06-03', {y: true, m: true, mRoundUp: true})}
+                            </strong>
+                        </small>
+
+                        <div class="text-xs mt-2 space-y-4">
+                            <p class="text-pretty">
+                                I build effective frontend solutions, design graphics and solve complex UX challenges
+                                for businesses (e-commerce, education, etc.), conduct training sessions (including
+                                non-tech people), organize meetings and do my best to ensure client satisfaction.
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex gap-3">
+                                    <span>
+                                        🔧
+                                    </span>
+                                    HTML, CSS (Tailwind, SASS), JavaScript, TypeScript, React.js, Vue.js, PHP (Laravel), Git + more
+                                </li>
+                                <li class="flex gap-3">
+                                    <span>
+                                        🎨
+                                    </span>
+                                    Figma, Adobe XD, Inkscape, GIMP
+                                </li>
+                            </ul>
+                        </div>
+
+                        <section class="grid gap-1 text-xs mt-4">
+                            <div class="space-y-2">
+                                <h5 class="font-semibold text-balance cursor-pointer border border-dashed px-2 py-0.5 rounded select-none"
+                                    data-expander-button>
+                                    Examples of what I've worked on 👈
+                                </h5>
+                                <div class="group grid grid-rows-[0fr] [.open]:grid-rows-[1fr] transition-[grid-template-rows]">
+                                    <ul class="overflow-hidden space-y-1 group-[.open]:p-2.5 group-[.open]:py-0.5 transition-[padding]">
+                                        <li>
+                                            <a href="https://akademiamerydian.pl" target="_blank"
+                                               class="text-blue [:is(:hover,:focus-visible)]:underline underline-offset-3">
+                                                <strong class="font-semibold">Akademia Merydian</strong>
+                                                – Educational platform
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://centralna.pl/" target="_blank"
+                                               class="text-blue [:is(:hover,:focus-visible)]:underline underline-offset-3">
+                                                <strong class="font-semibold">Apteka Centralna</strong>
+                                                – Online pharmacy
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://standardy.pl/" target="_blank"
+                                               class="text-blue [:is(:hover,:focus-visible)]:underline underline-offset-3">
+                                                <strong class="font-semibold">Standardy Medyczne</strong>
+                                                – Publishing
+                                            </a>
+                                        </li>
+                                        <li>
+                                            + more upcoming
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    </li>
+
+                    <li class="grid">
+                        <small class="text-neutral-400">Academy of Applied Sciences – WSZiA in Opole</small>
+                        <h4 class="font-bold tracking-wide">Research and Teaching Assistant</h4>
+                        <small>
+                            09.2023 – 03.2025
+                            <strong class="font-semibold">
+                              {timeElapsed('2023-09-10', {y: true, m: true, mRoundUp: true, endDate: '2025-03-14'})}
+                            </strong>
+                        </small>
+
+                        <div class="text-xs mt-2 grid gap-4">
+                            <div class="grid gap-2">
+                                <p class="text-pretty">
+                                    I taught psychological subjects to students, businesses and the public in both:
+                                    Polish and English.
+                                </p>
+                                <p class="text-pretty">
+                                    I also conducted studies, analyzed all kinds of data, wrote a book on identity
+                                    development and meaning
+                                    in life as well as designed various graphics and developed web applications for
+                                    conducting research,
+                                    school organization and overall creative problem-solving.
+                                </p>
+                            </div>
+
+                            <section class="grid gap-1">
+                                <div class="space-y-2">
+                                    <h5 class="font-semibold text-balance cursor-pointer border border-dashed px-2 py-0.5 rounded select-none"
+                                        data-expander-button>
+                                        What subjects did I teach? 👈
+                                    </h5>
+                                    <div class="group grid grid-rows-[0fr] [.open]:grid-rows-[1fr] transition-[grid-template-rows]">
+                                        <ul class="overflow-hidden space-y-1.5 lg:columns-2 group-[.open]:p-2.5 group-[.open]:pt-0.5 group-[.open]:pb-3 transition-[padding]">
+                                            <li>
+                                                Research methodology and design thinking
+                                            </li>
+                                            <li>
+                                                Psychological aspects of consumer behavior
+                                            </li>
+                                            <li>
+                                                Personality psychology
+                                            </li>
+                                            <li>
+                                                Developmental and educational psychology
+                                            </li>
+                                            <li>
+                                                Career planning
+                                            </li>
+                                            <li>
+                                                Business negotiations
+                                            </li>
+                                            <li>
+                                                Methods of conflict resolution (+ NVC)
+                                            </li>
+                                            <li>
+                                                Psychology of management
+                                            </li>
+                                            <li>
+                                                Cognitive psychology
+                                            </li>
+                                            <li>
+                                                Methodology of teaching IT
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <h5 class="font-semibold text-balance cursor-pointer border border-dashed px-2 py-0.5 rounded select-none"
+                                        data-expander-button>
+                                        What are my research fields? 👈
+                                    </h5>
+                                    <div class="group grid grid-rows-[0fr] [.open]:grid-rows-[1fr] transition-[grid-template-rows]">
+                                        <ul class="overflow-hidden space-y-1 lg:columns-2 group-[.open]:p-2.5 group-[.open]:pt-0.5 group-[.open]:pb-3 transition-[padding]">
+                                            <li>
+                                                Psychosynthesis
+                                            </li>
+                                            <li>
+                                                Identify Development
+                                            </li>
+                                            <li>
+                                                Purpose / Meaning in Life
+                                            </li>
+                                            <li>
+                                                Loneliness + Positive Solitude
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <h5 class="font-semibold text-balance cursor-pointer border border-dashed px-2 py-0.5 rounded select-none"
+                                        data-expander-button>
+                                        What did I do besides research and teaching? 👈
+                                    </h5>
+                                    <div class="group grid grid-rows-[0fr] [.open]:grid-rows-[1fr] transition-[grid-template-rows]">
+                                        <ul class="overflow-hidden space-y-1.5 lg:columns-2 group-[.open]:px-2.5 group-[.open]:py-0.5 transition-[padding]">
+                                            <li>
+                                                Graphic design (e.g. posters, banners, YT thumbnails)
+                                            </li>
+                                            <li>
+                                                Data entry, management and analysis (sheets, e.g. Excel, JASP)
+                                            </li>
+                                            <li>
+                                                Web design (HTML, CSS, JS) for research and work organization
+                                            </li>
+                                            <li>
+                                                Creating work schedules, planning
+                                            </li>
+                                            <li>
+                                                Communication and support (for employees and students EN/PL)
+                                            </li>
+                                            <li>
+                                                Writing and editing various documents
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="https://www.linkedin.com/in/leszczak" target="_blank" class="text-blue [:is(:hover,:focus-visible)]:underline underline-offset-3 font-medium">
+                            + Click here to see more
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="grid max-[456px]:grid-cols-[1fr_auto] min-[456px]:max-sm:grid-cols-2 gap-6 bg-blue text-white py-4 px-5 rounded-lg sm:max-md:row-start-3 min-[1100px]:self-start md:max-[900px]:col-span-2">
+                <span class="max-[384px]:text-sm sm:max-md:text-sm">
+                    <abbr title="August 24th, 1996" class="underline-offset-3 decoration-1"><strong>29</strong> yo</abbr>,
+                    Wrocław, Poland
+                </span>
+
+                <div class="grid gap-2">
+                    <h3 class="font-semibold">
+                        Languages
+                    </h3>
+                    <ul class="text-sm grid gap-1 list-['–_'] pl-3">
+                        <li>
+                            Polish <span class="text-blue-200">– native</span>
+                        </li>
+                        <li>
+                            English <span class="text-blue-200">– advanced</span> C1+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <button id="cloudy-btn" class="group relative max-sm:h-30 overflow-clip rounded-lg border border-yellow-700/50 cursor-pointer sm:max-md:row-start-4 sm:max-md:col-start-3 md:max-lg:col-start-2 min-[1100px]:row-start-3 min-[1100px]:row-end-5">
+                <span class="absolute inset-0 bg-white/60 grid place-items-center backdrop-blur tracking-wider font-medium text-blue group-[:is(:hover,:focus-visible)]:opacity-0 group-[:is(:hover,:focus-visible)]:pointer-events-none transition-opacity duration-300 group-[:is(:hover,:focus-visible)]:duration-1000">
+                    Click me! ☁️
+                </span>
+                <Image src="/cloudlove.webp" width="200" height="150" alt="drawing of a cloud and text: the only way to feel truly loved is to express your true self; you're good enough"
+                       class="min-[1100px]:aspect-square size-full object-cover [.big]:object-contain [.big]:fixed [.big]:inset-0 [.big]:p-4 md:[.big]:p-20 xl:[.big]:p-50 [.big]:z-90 [.big]:backdrop-blur"
+                       loading="eager"/>
+            </button>
+
+            <div class="bg-purple rounded-lg py-4 px-5 sm:max-md:col-start-3 md:max-[900px]:row-start-5 md:max-[1100px]:col-start-1 md:max-[1100px]:col-end-3 lg:max-[1100px]:row-start-4 lg:self-start text-white grid sm:place-items-center">
+                <h3 class="font-semibold flex flex-wrap gap-x-2.5 md:justify-self-start">
+                    Fun fact #2
+                </h3>
+                <p class="text-sm p-2">
+                    <em>I used to</em>: be a YouTuber, crochet, draw, bind my own notebooks, swim semi-professionally,
+                    train parkour, skateboard, write books and the list goes on... 🙈
+                </p>
+            </div>
+        </section>
+
+        <div class="relative my-10 sm:my-20 border border-dashed justify-self-center px-10 py-5 rounded-lg">
+            <p class="text-center relative z-20">
+                You can also download my current resume / CV:
+            </p>
+            <div class="grid grid-cols-2 gap-4 mt-4 mb-1 max-w-xs mx-auto text-center">
+                <a href="/pdf/Daniel%20Leszczak%20CV%20PL.pdf"
+                   class="peer/pl relative z-20 inline-block py-2 rounded border border-red-500 bg-red-500/90 text-white transition-colors [&:is(:hover,:focus)]:bg-red-500/10 [&:is(:hover,:focus)]:text-red-500 outline-none">
+                    <span class="text-xl font-bold">PL</span>
+                </a>
+                <div class="absolute inset-0 translate-y-1.5 rounded-lg -translate-x-1.5 bg-red-500 opacity-0 peer-[:is(:hover,:focus-visible)]/pl:opacity-5 z-0 pointer-events-none transition-opacity" />
+                <a href="/pdf/Daniel%20Leszczak%20CV%20ENG.pdf"
+                   class="peer/eng relative z-20 inline-block py-2 rounded border border-blue-500 bg-blue-500/90 text-white transition-colors [&:is(:hover,:focus)]:bg-blue-500/10 [&:is(:hover,:focus)]:text-blue-500 outline-none">
+                    <span class="text-xl font-bold">ENG</span>
+                </a>
+                <div class="absolute inset-0 -translate-y-1.5 rounded-lg translate-x-1.5 bg-blue opacity-0 peer-[:is(:hover,:focus-visible)]/eng:opacity-5 z-0 pointer-events-none transition-opacity" />
+            </div>
+        </div>
     </div>
-  </div>
+
+    <script>
+      import {id, on} from '@/scripts/utils'
+
+      const expanderButtons = document.querySelectorAll('[data-expander-button]')
+      const cloudyBtn = id('cloudy-btn')
+
+      expanderButtons.forEach(btn => {
+        on(btn, 'click', () => {
+          const nes = btn.nextElementSibling
+          nes.classList.toggle('open')
+        })
+      })
+
+      on(cloudyBtn, 'click', () => {
+          const img = cloudyBtn.querySelector('img')
+          img.classList.toggle('big')
+      })
+    </script>
 </BaseLayout>

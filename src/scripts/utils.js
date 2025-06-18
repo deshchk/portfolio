@@ -19,7 +19,7 @@ export const rFrom = array => array[getR(array.length)]
 export const formatDate = dateString => new Intl.DateTimeFormat('en-AU').format(new Date(dateString))
 // time since date
 export const timeElapsed = (dateString, options = null) => {
-  if (options === null) options = { y: true, m: true, d: true, mRoundUp: false }
+  if (options === null) options = { y: true, m: true, d: true, mRoundUp: false, endDate: null }
 
   const inputDate = new Date(dateString)
 
@@ -27,7 +27,7 @@ export const timeElapsed = (dateString, options = null) => {
     throw new Error('Invalid date format. Expected format: YYYY-MM-DD')
   }
 
-  const currentDate = new Date()
+  const currentDate = options.endDate ? new Date(options.endDate) : new Date()
 
 
   let days = currentDate.getDate() - inputDate.getDate()

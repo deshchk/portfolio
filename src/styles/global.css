@@ -176,7 +176,7 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
   & p a, & li a {
     @apply text-blue font-medium border-b border-dashed border-transparent outline-none transition-colors px-px;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       @apply border-blue;
     }
   }
@@ -184,7 +184,7 @@ body:has(.footer-link:focus) .footer-link:not(:focus){
   & :is(h2 a, h3 a, h4 a, h5 a, h6 a) {
     @apply border-b border-dashed border-transparent outline-none transition-colors;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       @apply border-green-dark;
     }
   }
